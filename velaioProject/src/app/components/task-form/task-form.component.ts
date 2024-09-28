@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { PersonFormComponent } from '../person-form/person-form.component';
+import { TaskService } from '../../service/task.service';
+import { ITask } from '../../models/task.model';
 
 
-import { ITask } from '../../../models/task.model';
-import { TaskService } from '../../../service/task.service';
-import { PersonFormComponent } from '../../person-form/person-form/person-form.component';
+
 
 @Component({
   selector: 'app-task-form',
