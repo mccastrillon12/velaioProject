@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PersonFormComponent } from '../person-form/person-form.component';
 import { TaskService } from '../../service/task.service';
 import { ITask } from '../../models/task.model';
+import { Router } from '@angular/router';
 
 
 
@@ -17,12 +18,14 @@ import { ITask } from '../../models/task.model';
 export class TaskFormComponent {
   private fb = inject(FormBuilder);
   private taskService = inject(TaskService);
+  private router = inject(Router);
 
   taskForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     deadline: ['', Validators.required],
     people: this.fb.array([]),
   });
+
 
   get people(): FormArray {
     return this.taskForm.get('people') as FormArray;
@@ -56,6 +59,8 @@ export class TaskFormComponent {
       };
       this.taskService.addTask(newTask);
       this.taskForm.reset();
+
+      this.router.navigate(['/all-tasks']);
     }
   }
 }
