@@ -1,19 +1,17 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { PersonFormComponent } from '../person-form/person-form.component';
 import { TaskService } from '../../service/task.service';
 import { ITask } from '../../models/task.model';
-import { Router } from '@angular/router';
-
-
-
 
 @Component({
   selector: 'app-task-form',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, PersonFormComponent],
   templateUrl: './task-form.component.html',
+  styleUrls: ['./task-form.component.css'],
 })
 export class TaskFormComponent {
   private fb = inject(FormBuilder);
@@ -23,12 +21,11 @@ export class TaskFormComponent {
   taskForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     deadline: ['', Validators.required],
-    people: this.fb.array([]),
+    persons: this.fb.array([]),
   });
 
-
-  get people(): FormArray {
-    return this.taskForm.get('people') as FormArray;
+  get persons(): FormArray {
+    return this.taskForm.get('persons') as FormArray;
   }
 
   addPerson() {
@@ -38,16 +35,26 @@ export class TaskFormComponent {
       skills: this.fb.array([this.fb.control('', Validators.required)]),
     });
 
-    this.people.push(personForm);
+    this.persons.push(personForm);
   }
 
   removePerson(index: number) {
-    this.people.removeAt(index);
+    this.persons.removeAt(index);
   }
 
+  addSkill(personIndex: number) {
+    const skills = this.getSkills(personIndex);
+    skills.push(new FormControl('', Validators.required));
+  }
 
-  getPersonFormGroup(index: number): FormGroup {
-    return this.people.at(index) as FormGroup;
+  removeSkill(personIndex: number, skillIndex: number) {
+    const skills = this.getSkills(personIndex);
+    skills.removeAt(skillIndex);
+  }
+
+  // Cambiar a `public` para que sea accesible en el HTML
+  public getSkills(personIndex: number): FormArray {
+    return this.persons.at(personIndex).get('skills') as FormArray;
   }
 
   saveTask() {
@@ -60,7 +67,11 @@ export class TaskFormComponent {
       this.taskService.addTask(newTask);
       this.taskForm.reset();
 
+      // Redirigir a la página "all-tasks" después de guardar la tarea
       this.router.navigate(['/all-tasks']);
+    } else {
+      // Marcar todos los controles como "touched" para activar los mensajes de error
+      this.taskForm.markAllAsTouched();
     }
   }
 }
