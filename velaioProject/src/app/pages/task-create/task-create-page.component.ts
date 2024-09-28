@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TaskFormComponent } from '../../components/task-form/task-form.component';
 
 @Component({
   selector: 'app-task-create-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, TaskFormComponent],
   templateUrl: './task-create-page.component.html',
-  styleUrl: './task-create-page.component.css'
+  styleUrls: ['./task-create-page.component.css']
 })
-export class TaskCreatePageComponent {
-
-}
+export class TaskCreatePageComponent {}
