@@ -9,8 +9,8 @@
         <input type="date" id="deadline" formControlName="deadline" />
     </div>
 
-    <div formArrayName="persons">
-        <div *ngFor="let person of persons.controls; let i = index">
+    <div formArrayName="people">
+        <div *ngFor="let person of people.controls; let i = index">
             <app-person-form [personForm]="getPersonFormGroup(i)"></app-person-form>
             <button type="button" (click)="removePerson(i)">Remove Person</button>
         </div>

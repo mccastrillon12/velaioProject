@@ -20,11 +20,11 @@ export class TaskFormComponent {
   taskForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     deadline: ['', Validators.required],
-    persons: this.fb.array([]),
+    people: this.fb.array([]),
   });
 
-  get persons(): FormArray {
-    return this.taskForm.get('persons') as FormArray;
+  get people(): FormArray {
+    return this.taskForm.get('people') as FormArray;
   }
 
   addPerson() {
@@ -34,16 +34,16 @@ export class TaskFormComponent {
       skills: this.fb.array([this.fb.control('', Validators.required)]),
     });
 
-    this.persons.push(personForm);
+    this.people.push(personForm);
   }
 
   removePerson(index: number) {
-    this.persons.removeAt(index);
+    this.people.removeAt(index);
   }
 
 
   getPersonFormGroup(index: number): FormGroup {
-    return this.persons.at(index) as FormGroup;
+    return this.people.at(index) as FormGroup;
   }
 
   saveTask() {
