@@ -1,0 +1,21 @@
+<form [formGroup]="taskForm" (ngSubmit)="saveTask()">
+    <div>
+        <label for="name">Task Name</label>
+        <input id="name" formControlName="name" />
+    </div>
+
+    <div>
+        <label for="deadline">Deadline</label>
+        <input type="date" id="deadline" formControlName="deadline" />
+    </div>
+
+    <div formArrayName="persons">
+        <div *ngFor="let person of persons.controls; let i = index">
+            <app-person-form [personForm]="getPersonFormGroup(i)"></app-person-form>
+            <button type="button" (click)="removePerson(i)">Remove Person</button>
+        </div>
+    </div>
+
+    <button type="button" (click)="addPerson()">Add Person</button>
+    <button type="submit">Save Task</button>
+</form>
