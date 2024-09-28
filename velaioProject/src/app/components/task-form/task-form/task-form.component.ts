@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 
 import { ITask } from '../../../models/task.model';
 import { TaskService } from '../../../service/task.service';
+import { PersonFormComponent } from '../../person-form/person-form/person-form.component';
 
 @Component({
   selector: 'app-task-form',
