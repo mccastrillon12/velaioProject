@@ -22,6 +22,13 @@ export class EditTaskPageComponent implements OnInit {
   
   taskForm!: FormGroup;
   taskId!: number;
+  today: string;
+
+  constructor() {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); 
+    this.today = currentDate.toISOString().split('T')[0]; 
+  }
 
   ngOnInit() {
     this.taskId = Number(this.route.snapshot.paramMap.get('id'));

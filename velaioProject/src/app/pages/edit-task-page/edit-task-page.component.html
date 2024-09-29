@@ -14,18 +14,18 @@
 
     <div>
       <label for="deadline">Deadline</label>
-      <input type="date" id="deadline" formControlName="deadline" />
+      <input type="date" id="deadline" formControlName="deadline" [min]="today" />
       <div *ngIf="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched" class="error">
         <div *ngIf="taskForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
       </div>
     </div>
 
-   
+ 
     <div formArrayName="people">
       <h2>People</h2>
       <ul>
         <li *ngFor="let person of people.controls; let i = index">
-       
+         
           <div *ngIf="person.get('isEditing')?.value" [formGroupName]="i">
             <label>Full Name</label>
             <input formControlName="fullName" />
@@ -41,7 +41,7 @@
               <div *ngIf="person.get('age')?.errors?.['min']">Age must be at least 18 years.</div>
             </div>
 
-    
+          
             <div formArrayName="skills">
               <div *ngFor="let skill of getSkills(i).controls; let j = index">
                 <label>Skill</label>
@@ -54,11 +54,11 @@
               <button type="button" (click)="addSkill(i)">Add Skill</button>
             </div>
 
-         
+           
             <button type="button" (click)="savePerson(i)">Save</button>
           </div>
 
-     
+      
           <div *ngIf="!person.get('isEditing')?.value">
             {{ person.get('fullName')?.value }} ({{ person.get('age')?.value }} years old)
             <ul>

@@ -10,13 +10,15 @@
   </div>
 
 
-  <div>
-    <label for="deadline">Deadline</label>
-    <input type="date" id="deadline" formControlName="deadline" />
-    <div *ngIf="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched" class="error">
-      <div *ngIf="taskForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
-    </div>
+<div>
+  <label for="deadline">Deadline</label>
+  <input type="date" id="deadline" formControlName="deadline" [min]="today" />
+  <div *ngIf="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched" class="error">
+    <div *ngIf="taskForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
   </div>
+</div>
+
+  
 
 
   <div formArrayName="persons">

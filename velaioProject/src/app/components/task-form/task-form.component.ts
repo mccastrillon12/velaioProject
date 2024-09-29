@@ -17,6 +17,12 @@ export class TaskFormComponent {
   private fb = inject(FormBuilder);
   private taskService = inject(TaskService);
   private router = inject(Router);
+  today: string;
+  constructor() {
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0); 
+    this.today = currentDate.toISOString().split('T')[0]; 
+  }
 
   taskForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
