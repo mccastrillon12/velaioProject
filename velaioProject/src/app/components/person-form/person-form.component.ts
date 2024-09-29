@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './person-form.component.html',
-  styleUrl: './person-form.component.css'
+  styleUrls: ['./person-form.component.css']
 })
 export class PersonFormComponent {
   private fb = inject(FormBuilder);
@@ -22,7 +22,9 @@ export class PersonFormComponent {
     this.skills.push(new FormControl('', Validators.required));
   }
 
-  removeSkill(skillIndex: number) {
-    this.skills.removeAt(skillIndex);
+  removeSkill(index: number) {
+    if (this.skills.length > 1) {
+      this.skills.removeAt(index);
+    }
   }
 }

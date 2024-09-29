@@ -52,7 +52,7 @@ export class TaskFormComponent {
     skills.removeAt(skillIndex);
   }
 
-  // Cambiar a `public` para que sea accesible en el HTML
+ 
   public getSkills(personIndex: number): FormArray {
     return this.persons.at(personIndex).get('skills') as FormArray;
   }
@@ -63,14 +63,15 @@ export class TaskFormComponent {
         ...this.taskForm.value,
         id: Math.random(),
         isCompleted: false,
+        people: this.persons.value,
       };
       this.taskService.addTask(newTask);
       this.taskForm.reset();
 
-      // Redirigir a la página "all-tasks" después de guardar la tarea
+
       this.router.navigate(['/all-tasks']);
     } else {
-      // Marcar todos los controles como "touched" para activar los mensajes de error
+      
       this.taskForm.markAllAsTouched();
     }
   }

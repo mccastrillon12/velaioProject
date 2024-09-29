@@ -15,18 +15,22 @@ export class TaskService {
     this.tasksSubject.next(this.tasks);
   }
 
-  updateTask(updatedTask: ITask) {
-    const index = this.tasks.findIndex(task => task.id === updatedTask.id);
-    if (index !== -1) {
-      this.tasks[index] = updatedTask;
-      this.tasksSubject.next(this.tasks);
-    }
-  }
-
   markTaskAsCompleted(taskId: number) {
     const task = this.tasks.find(task => task.id === taskId);
     if (task) {
       task.isCompleted = true;
+      this.tasksSubject.next(this.tasks);
+    }
+  }
+
+  getTaskById(taskId: number): ITask | undefined {
+    return this.tasks.find(task => task.id === taskId);
+  }
+
+  updateTask(taskId: number, updatedTask: Partial<ITask>) {
+    const index = this.tasks.findIndex(task => task.id === taskId);
+    if (index !== -1) {
+      this.tasks[index] = { ...this.tasks[index], ...updatedTask };
       this.tasksSubject.next(this.tasks);
     }
   }

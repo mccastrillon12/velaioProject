@@ -2,6 +2,7 @@
   <h3>{{ task.name }} ({{ task.isCompleted ? 'Completed' : 'Pending' }})</h3>
   <p>Deadline: {{ task.deadline | date }}</p>
   <button *ngIf="!task.isCompleted" (click)="markAsCompleted(task.id)">Mark as Completed</button>
+  <button [routerLink]="['/edit-task', task.id]">Edit</button>
   <ul>
     <li *ngFor="let person of task.people">
       {{ person.fullName }} ({{ person.age }} years old)
