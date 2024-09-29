@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { ITask,  } from '../../models/task.model';
+import { ITask } from '../../models/task.model';
 import { TaskService } from '../../service/task.service';
 import { IPerson } from '../../models/person.model';
 
@@ -53,7 +53,7 @@ export class EditTaskPageComponent implements OnInit {
           ? person.skills.map((skill: string) => this.fb.control(skill, Validators.required))
           : [this.fb.control('', Validators.required)]
       ),
-      isEditing: [false] 
+      isEditing: [person ? false : true]
     });
 
     this.people.push(personForm);
@@ -61,7 +61,17 @@ export class EditTaskPageComponent implements OnInit {
 
   editPerson(index: number) {
     const person = this.people.at(index);
-    person.get('isEditing')?.setValue(true);   }
+    person.get('isEditing')?.setValue(true);
+  }
+
+  savePerson(index: number) {
+    const person = this.people.at(index);
+    if (person.valid) {
+      person.get('isEditing')?.setValue(false);
+    } else {
+      person.markAllAsTouched();
+    }
+  }
 
   removePerson(index: number) {
     this.people.removeAt(index);
