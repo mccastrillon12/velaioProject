@@ -6,17 +6,15 @@
     color: red;
     font-size: 0.9em;
 }
-/* General Styles */
-* {
-    font-family: 'Poppins', sans-serif;
-    box-sizing: border-box;
-  }
+
+
   
   .person-form {
     padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px;
     padding-bottom: 0;
+    box-shadow: 5px 7px 5px #ebebeb;
   }
   
   .person-form__group {
@@ -94,6 +92,7 @@
    .person-form__actions {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 15px;
 }
 
 .person-form__button--save{
@@ -105,7 +104,7 @@
   border: 1px solid #6a0dad;
 }
 
-  /* Responsive Styles for Desktop */
+
   @media (min-width: 768px) {
     .person-form__group {
       flex-direction: row;

@@ -19,6 +19,7 @@ export class TaskFormComponent {
   private router = inject(Router);
 
   today: string;
+  isAddingPerson: boolean = false;  
 
   constructor() {
     const currentDate = new Date();
@@ -45,11 +46,13 @@ export class TaskFormComponent {
   }
 
   addPerson() {
+    this.isAddingPerson = true;  
     const personForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(5)]],
       age: ['', [Validators.required, Validators.min(18)]],
       skills: this.fb.array([this.fb.control('', Validators.required)]),
-      isEditing: [true],     });
+      isEditing: [true],
+    });
 
     this.persons.push(personForm);
   }
@@ -62,11 +65,12 @@ export class TaskFormComponent {
   onSavePerson(index: number) {
     const person = this.persons.at(index);
     person.get('isEditing')?.setValue(false);
+    this.isAddingPerson = false;
   }
 
   removePerson(index: number) {
     this.persons.removeAt(index);
-  }
+    this.isAddingPerson = false;    }
 
   isNameDuplicate(index: number): boolean {
     const currentName = this.persons.at(index).get('fullName')?.value;
@@ -98,6 +102,7 @@ export class TaskFormComponent {
       this.taskForm.markAllAsTouched();
     }
   }
+
   cancel() {
     this.router.navigate(['/']); 
   }
