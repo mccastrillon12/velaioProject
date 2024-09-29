@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { ITask } from '../../models/task.model';
@@ -24,6 +24,7 @@ export class EditTaskPageComponent implements OnInit {
   taskForm!: FormGroup;
   taskId!: number;
   today: string;
+  originalPersonData: { [key: number]: IPerson } = {};
 
   constructor() {
     const currentDate = new Date();
@@ -42,8 +43,9 @@ export class EditTaskPageComponent implements OnInit {
         people: this.fb.array([]),
       });
 
-      task.people.forEach((person: IPerson) => {
+      task.people.forEach((person: IPerson, index: number) => {
         this.addPerson(person);
+        this.originalPersonData[index] = { ...person };
       });
     }
   }
@@ -74,31 +76,30 @@ export class EditTaskPageComponent implements OnInit {
   editPerson(index: number) {
     const person = this.people.at(index);
     person.get('isEditing')?.setValue(true);
+    this.originalPersonData[index] = { ...person.value };
   }
 
-  savePerson(index: number) {
+  onSavePerson(index: number) {
     const person = this.people.at(index);
-    if (person.valid) {
-      person.get('isEditing')?.setValue(false);
-    } else {
-      person.markAllAsTouched();
+    person.get('isEditing')?.setValue(false);
+  }
+
+  cancelEditPerson(index: number) {
+    const person = this.people.at(index);
+
+    if (this.originalPersonData[index]) {
+      person.patchValue(this.originalPersonData[index]);
     }
+    person.get('isEditing')?.setValue(false);
   }
 
   removePerson(index: number) {
     this.people.removeAt(index);
+    delete this.originalPersonData[index];
   }
 
   getSkills(personIndex: number): FormArray {
     return this.people.at(personIndex).get('skills') as FormArray;
-  }
-
-  addSkill(personIndex: number) {
-    this.getSkills(personIndex).push(this.fb.control('', Validators.required));
-  }
-
-  removeSkill(personIndex: number, skillIndex: number) {
-    this.getSkills(personIndex).removeAt(skillIndex);
   }
 
   hasDuplicateNames(): boolean {

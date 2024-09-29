@@ -1,4 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 export class PersonFormComponent {
   @Input() personForm!: FormGroup;
   @Input() isNameDuplicate!: boolean;
+  @Output() cancel = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
 
   private fb = inject(FormBuilder);
 
@@ -28,6 +30,16 @@ export class PersonFormComponent {
       this.skills.removeAt(index);
     }
   }
+
+  onSave() {
+    if (this.personForm.valid) {
+      this.save.emit(); 
+    } else {
+      this.personForm.markAllAsTouched();
+    }
+  }
+
+  onCancel() {
+    this.cancel.emit();
+  }
 }
-
-
