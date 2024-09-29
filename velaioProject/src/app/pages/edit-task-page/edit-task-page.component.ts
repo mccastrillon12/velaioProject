@@ -11,7 +11,7 @@ import { PersonFormComponent } from '../../components/person-form/person-form.co
 @Component({
   selector: 'app-edit-task-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,PersonFormComponent],
+  imports: [CommonModule, ReactiveFormsModule, PersonFormComponent],
   templateUrl: './edit-task-page.component.html',
   styleUrls: ['./edit-task-page.component.css'],
 })
@@ -20,15 +20,15 @@ export class EditTaskPageComponent implements OnInit {
   private taskService = inject(TaskService);
   private fb = inject(FormBuilder);
   private router = inject(Router);
-  
+
   taskForm!: FormGroup;
   taskId!: number;
   today: string;
 
   constructor() {
     const currentDate = new Date();
-    currentDate.setHours(0, 0, 0, 0); 
-    this.today = currentDate.toISOString().split('T')[0]; 
+    currentDate.setHours(0, 0, 0, 0);
+    this.today = currentDate.toISOString().split('T')[0];
   }
 
   ngOnInit() {
@@ -65,7 +65,7 @@ export class EditTaskPageComponent implements OnInit {
           ? person.skills.map((skill: string) => this.fb.control(skill, Validators.required))
           : [this.fb.control('', Validators.required)]
       ),
-      isEditing: [person ? false : true]
+      isEditing: [person ? false : true],
     });
 
     this.people.push(personForm);
@@ -106,6 +106,7 @@ export class EditTaskPageComponent implements OnInit {
     const uniqueNames = new Set(names);
     return uniqueNames.size !== names.length;
   }
+
   isNameDuplicate(index: number): boolean {
     const currentName = this.people.at(index).get('fullName')?.value;
     const names = this.people.controls.map(control => control.get('fullName')?.value);
@@ -119,9 +120,21 @@ export class EditTaskPageComponent implements OnInit {
       };
       this.taskService.updateTask(this.taskId, updatedTask);
       this.router.navigate(['/all-tasks']);
-    }else {
+    } else {
       this.taskForm.markAllAsTouched();
-}
+    }
+  }
+
+  markTaskAsCompleted() {
+    if (this.taskForm.valid) {
+      const updatedTask: Partial<ITask> = {
+        ...this.taskForm.value,
+        isCompleted: true,
+      };
+      this.taskService.updateTask(this.taskId, updatedTask);
+      this.router.navigate(['/all-tasks']);
+    } else {
+      this.taskForm.markAllAsTouched();
+    }
   }
 }
-
