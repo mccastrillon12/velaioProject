@@ -190,26 +190,7 @@
   }
   
 
-  .add-task {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-  }
   
-  .add-task-btn {
-    background: #6A0DAD;
-    color: #fff;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: none;
-    font-size: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-  }
   
 
   .view-todo-btn {

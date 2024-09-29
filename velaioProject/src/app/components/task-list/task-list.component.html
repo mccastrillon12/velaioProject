@@ -1,15 +1,61 @@
-<div *ngFor="let task of tasks">
-  <h3>{{ task.name }} ({{ task.isCompleted ? 'Completed' : 'Pending' }})</h3>
+<div *ngFor="let task of tasks" class="task-card">
+  <div class="task-card__header">
+    <h3 class="task-card__title">{{ task.name }}</h3>
+    <p class="task-card__status">{{ task.isCompleted ? 'Completed' : 'Pending' }}</p>
+  </div>
 
-  <p>Deadline: {{ task.deadline | date }}</p>
-  <ul>
-    <li *ngFor="let person of task.people">
-      {{ person.fullName }} ({{ person.age }} years old)
-      <ul>
-        <li *ngFor="let skill of person.skills">{{ skill }}</li>
-      </ul>
-    </li>
-  </ul>
-  <button *ngIf="!task.isCompleted" (click)="markAsCompleted(task.id)">Mark as Completed</button>
-  <button [routerLink]="['/edit-task', task.id]">Edit</button>
+  <div class="task-card__content">
+
+    <div class="task-card__team">
+      <p class="task-card__team-title">Team</p>
+      <div *ngIf="task.people.length > 0; else noPeopleAssigned" class="task-card__team-members">
+        <div *ngFor="let person of task.people.slice(0, 3); let i = index" class="task-card__team-member">
+          <span
+            class="task-card__team-initial"
+            [ngClass]="{
+              'task-card__team-initial--dark': i % 3 === 0,
+              'task-card__team-initial--medium': i % 3 === 1,
+              'task-card__team-initial--light': i % 3 === 2
+            }"
+            title="{{ person.fullName }}"
+          >
+            {{ person.fullName.charAt(0) }}
+          </span>
+          <div class="task-card__team-info">
+            <p class="task-card__team-name">{{ person.fullName }} ({{ person.age }} years old)</p>
+            <ul class="task-card__team-skills">
+              <li *ngFor="let skill of person.skills">{{ skill }}</li>
+            </ul>
+          </div>
+        </div>
+        <span *ngIf="task.people.length > 3" class="task-card__team-member task-card__team-member--more">
+          +{{ task.people.length - 3 }}
+        </span>
+      </div>
+      <ng-template #noPeopleAssigned>
+        <p class="task-card__team-not-assigned">This task has not been assigned</p>
+      </ng-template>
+    </div>
+
+
+    <div class="task-card__progress">
+      <div *ngIf="task.isCompleted" class="task-card__progress-circle">
+        <svg viewBox="0 0 36 36" class="task-card__progress-svg">
+          <path class="task-card__progress-background" d="M18 2.0845a 15.9155 15.9155 0 1 0 0 31.831 15.9155 15.9155 0 1 0 0-31.831" />
+          <path class="task-card__progress-stroke" stroke-dasharray="100, 100" d="M18 2.0845a 15.9155 15.9155 0 1 0 0 31.831 15.9155 15.9155 0 1 0 0-31.831" />
+        </svg>
+        <span class="task-card__progress-percentage">100%</span>
+      </div>
+      <div *ngIf="!task.isCompleted" class="task-card__progress-text">Pending</div>
+    </div>
+  </div>
+
+
+  <div class="task-card__footer">
+    <div class="task-card__deadline">
+      <i class="fas fa-calendar-alt"></i>
+      <span>{{ task.deadline | date }}</span>
+    </div>
+    <button [routerLink]="['/edit-task', task.id]" class="task-card__edit-btn">Edit</button>
+  </div>
 </div>
