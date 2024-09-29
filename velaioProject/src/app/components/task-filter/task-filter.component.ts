@@ -11,9 +11,12 @@ import { CommonModule } from '@angular/common';
 export class TaskFilterComponent {
 
   @Output() filterChanged = new EventEmitter<string>();
+  activeFilter: string = 'all';
 
 
   setFilter(filter: string) {
     this.filterChanged.emit(filter);
+    this.activeFilter = filter;
+    
   }
 }

@@ -1,3 +1,19 @@
 <div class="container">
   <router-outlet></router-outlet>
+  <div class="add-task">
+    <button class="add-task-btn" (click)="toggleMenu()">
+      <span [ngClass]="{ 'plus-icon': !isMenuOpen, 'x-icon': isMenuOpen }">
+        {{ isMenuOpen ? 'X' : '+' }}
+      </span>
+    </button>
+  
+    <div class="floating-menu" *ngIf="isMenuOpen">
+      <button class="menu-item" (click)="navigateTo('/')">Inicio</button>
+      <button class="menu-item" (click)="navigateTo('/create-task')">Add Task</button>
+      <button class="menu-item" (click)="navigateTo('/all-tasks')">All Task</button>
+    </div>
+  </div>
+  
+  
+  
 </div>

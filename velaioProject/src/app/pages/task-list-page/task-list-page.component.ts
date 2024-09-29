@@ -2,8 +2,9 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskListComponent } from '../../components/task-list/task-list.component';
 import { ITask } from '../../models/task.model';
-import { TaskFilterComponent } from '../../components/task-filter/task-filter/task-filter.component';
+
 import { TaskService } from '../../service/task.service';
+import { TaskFilterComponent } from '../../components/task-filter/task-filter.component';
 
 @Component({
   selector: 'app-task-list-page',
@@ -18,13 +19,13 @@ export class TaskListPageComponent {
   filteredTasks: ITask[] = [];
 
   constructor() {
-    // Inicializar las tareas filtradas con todas las tareas
+ 
     this.tasks$.subscribe((tasks) => {
       this.filteredTasks = tasks;
     });
   }
 
-  // Método que recibe el valor del filtro y actualiza la lista de tareas
+
   onFilterChanged(filter: string) {
     this.tasks$.subscribe((tasks) => {
       switch (filter) {

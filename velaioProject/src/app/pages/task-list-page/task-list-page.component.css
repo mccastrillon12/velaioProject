@@ -1,0 +1,26 @@
+.container {
+    padding: 1rem;
+}
+.task-list__title{
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #6a0dad;
+}
+@media (min-width: 768px) {
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+
+}
+
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        padding: 2rem;
+    }
+
+
+}

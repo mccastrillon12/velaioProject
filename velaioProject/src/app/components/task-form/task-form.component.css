@@ -1,150 +1,226 @@
 
-  
+.task-form__container {
+  padding: 20px;
+  border-radius: 10px;
+  margin: 0 10px; 
+}
+
+
+.task-form__title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #6a0dad;
+}
+
+
+.task-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+.task-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+
+.task-form__group--icon .task-form__input-group {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.task-form__input-group--date {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+
+.task-form__icon {
+  margin-right: 10px;
+  color: #6c757d;
+}
+
+
+.task-form__icon--datepicker {
+  position: absolute;
+  right: 10px;
+  color: #6a0dad;
+}
+
+
+.task-form__input,
+.task-form__input--icon,
+.task-form__input--date {
+  font-size: 14px;
+  border: none;
+  outline: none;
+  flex: 1;
+  padding: 5px;
+}
+
+
+.task-form__input--icon::placeholder,
+.task-form__input--date::placeholder {
+  color: #a0a0a0;
+  font-size: 12px;
+}
+
+.task-form__input--date {
+  color: #a0a0a0;
+}
+
+
+.task-form__label {
+  color: #6a0dad;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+.task-form__error {
+  color: #ff4d4f;
+  font-size: 12px;
+}
+
+
+.task-form__subtitle {
+  color: #6a0dad;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+.task-form__list {
+  list-style: none;
+  padding: 0;
+}
+
+.task-form__list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 8px;
+}
+
+
+.task-form__button {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+
+.task-form__button--add {
+  background-color: #6a0dad;
+  color: #ffffff;
+}
+
+.task-form__button--remove {
+  background-color: #f44336;
+  color: #ffffff;
+}
+
+.task-form__button--submit {
+  background-color: #6a0dad;
+  color: #ffffff;
+}
+
+.task-form__button--cancel {
+  border: 1px solid #6a0dad;
+  color: #6a0dad;
+  background-color: transparent;
+}
+
+
+.task-form__actions {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+
+.task-form__buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+
+@media (min-width: 768px) {
   .task-form__container {
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    /* background-color: #f9f9f9; */
-    border-radius: 10px;
   }
-  
+
   .task-form__title {
     font-size: 24px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #6a0dad; 
   }
-  
+
   .task-form__form {
-    display: flex;
-    flex-direction: column;
     gap: 20px;
   }
-  
+
   .task-form__group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
-  
-  .task-form__group--icon .task-form__input-group {
-    display: flex;
+    flex-direction: row;
     align-items: center;
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
-  .task-form__input-group--date {
-    display: flex;
-    align-items: center;
-    background: #ffffff;
-    padding: 10px 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  
-  .task-form__icon {
-    margin-right: 10px;
-    color: #6c757d;
-  }
-  
-  .task-form__icon--datepicker {
-    position: absolute;
-    right: 15px;
-    color: #6a0dad; 
-  }
-  
-  .task-form__input, .task-form__input--icon, .task-form__input--date {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    flex: 1;
-  }
-  
-  .task-form__input--icon::placeholder, .task-form__input--date::placeholder {
-    color: #a0a0a0;
-    font-size: 14px;
-  }
-  
-  .task-form__input--date {
-    color: #a0a0a0; 
-  }
-  
+
   .task-form__label {
-    color: #6a0dad;
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  .task-form__error {
-    color: #ff4d4f;
+    width: 25%;
     font-size: 14px;
   }
-  
-  .task-form__subtitle {
-    color: #6a0dad; 
-    font-size: 12px; 
-      font-weight: bold; 
-    margin-bottom: 10px;
-  }
-  
-  .task-form__list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .task-form__list-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #ffffff;
-    border-radius: 8px;
-  }
-  
-  .task-form__button {
-    padding: 10px 15px;
+
+  .task-form__input {
+    width: 75%;
     font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .task-form__button--add {
-    background-color: #6a0dad;
-    color: #ffffff;
   }
 
-
-  .task-form__button--remove {
-    background-color: #f44336;
-    color: #ffffff;
+  .task-form__list-item {
+    padding: 15px;
   }
-  
-  .task-form__button--submit {
-    background-color: #6a0dad;
-    color: #ffffff;
-  }
-  
 
-  
+  .task-form__button {
+    font-size: 16px;
+    padding: 10px 15px;
+  }
+
   .task-form__actions {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .task-form__container {
+    padding: 30px;
   }
 
-  .task-form__buttons{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  .task-form__title {
+    font-size: 28px;
   }
-  
-  .task-form__button--cancel{
-    border: 1px solid #6a0dad;
+
+  .task-form__button {
+    font-size: 18px;
+    padding: 12px 20px;
   }
+}
