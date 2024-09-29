@@ -1,136 +1,161 @@
+
 .duplicate-error {
-    border: 2px solid red;
+  border: 2px solid red;
 }
 
 .error {
-    color: red;
-    font-size: 0.9em;
+  color: red;
+  font-size: 0.9em;
 }
 
 
-  
-  .person-form {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    padding-bottom: 0;
-    box-shadow: 5px 7px 5px #ebebeb;
-  }
-  
-  .person-form__group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 15px;
-  }
-  
-  .person-form__label {
-    color: #6a0dad;
-    font-size: 12px;
-    font-weight: bold;
-  }
-  
-  .person-form__input {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    outline: none;
-  }
-  
-  .person-form__input--duplicate-error {
-    border-color: #ff4d4f;
-  }
-  
-  .person-form__input::placeholder {
-    color: #a0a0a0;
-    font-size: 14px;
-  }
-  
-  .person-form__error {
-    color: #ff4d4f;
-    font-size: 14px;
-  }
-  
-  .person-form__group--skills {
-    margin-bottom: 20px;
-  }
-  
-  .person-form__skill {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-bottom: 10px;
-    position: relative;
-  }
-  
-  .person-form__button {
-    padding: 8px 12px;
-    font-size: 14px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .person-form__button--add {
-    background-color: #6a0dad;
-    color: #ffffff;
-  }
-  
-  .person-form__button--remove {
-    background-color: #f44336;
-    color: #ffffff;
-    align-self: flex-end;
-    margin-top: 5px;
-  }
-  
-  .person-form__button:hover {
-    opacity: 0.8;
-  }
-  
-   .person-form__actions {
-    display: flex;
-    justify-content: space-between;
-    padding-bottom: 15px;
+.person-form {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 5px 7px 5px #ebebeb;
 }
 
-.person-form__button--save{
+
+.person-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 15px;
+}
+
+
+.person-form__label {
+  color: #6a0dad;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+.person-form__input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  outline: none;
+}
+
+
+.person-form__input--duplicate-error {
+  border-color: #ff4d4f;
+}
+
+
+.person-form__input::placeholder {
+  color: #a0a0a0;
+  font-size: 14px;
+}
+
+
+.person-form__error {
+  color: #ff4d4f;
+  font-size: 14px;
+}
+
+
+.person-form__group--skills {
+  margin-bottom: 20px;
+}
+
+
+.person-form__skill {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.person-form__button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+
+.person-form__button--add {
   background-color: #6a0dad;
   color: #ffffff;
-  
 }
-.person-form__button--cancel{
+
+
+.person-form__button--remove {
+  background-color: #f44336;
+  color: #ffffff;
+  align-self: flex-end;
+  margin-top: 5px;
+}
+
+
+.person-form__button:hover {
+  opacity: 0.8;
+}
+
+
+.person-form__actions {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 15px;
+}
+
+
+.person-form__button--save {
+  background-color: #6a0dad;
+  color: #ffffff;
+}
+
+
+.person-form__button--cancel {
   border: 1px solid #6a0dad;
+  color: #6a0dad;
+  background-color: transparent;
 }
 
 
-  @media (min-width: 768px) {
-    .person-form__group {
-      flex-direction: row;
-      align-items: center;
-      gap: 15px;
-    }
-  
-    .person-form__label {
-      width: 20%;
-      font-size: 14px;
-    }
-  
-    .person-form__input {
-      width: 80%;
-    }
-  
-    .person-form__skill {
-      flex-direction: row;
-      align-items: center;
-      gap: 15px;
-    }
-  
-    .person-form__button--remove {
-      margin-left: 15px;
-      margin-top: 0;
-    }
-
+@media (min-width: 768px) {
+  .person-form__group {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
   }
-  
+
+  .person-form__label {
+    width: 20%;
+    font-size: 16px;
+  }
+
+  .person-form__input {
+    width: 80%;
+  }
+
+  .person-form__skill {
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .person-form__button--remove {
+    margin-left: 15px;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 1024px) {
+  .person-form {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .person-form__button {
+    font-size: 16px;
+  }
+}
