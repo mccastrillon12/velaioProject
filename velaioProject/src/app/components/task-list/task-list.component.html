@@ -1,7 +1,6 @@
 <div *ngFor="let task of tasks">
   <h3>{{ task.name }} ({{ task.isCompleted ? 'Completed' : 'Pending' }})</h3>
-  <button *ngIf="!task.isCompleted" (click)="markAsCompleted(task.id)">Mark as Completed</button>
-  <button [routerLink]="['/edit-task', task.id]">Edit</button>
+
   <p>Deadline: {{ task.deadline | date }}</p>
   <ul>
     <li *ngFor="let person of task.people">
@@ -11,4 +10,6 @@
       </ul>
     </li>
   </ul>
+  <button *ngIf="!task.isCompleted" (click)="markAsCompleted(task.id)">Mark as Completed</button>
+  <button [routerLink]="['/edit-task', task.id]">Edit</button>
 </div>
