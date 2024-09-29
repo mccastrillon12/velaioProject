@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { ITask } from '../../models/task.model';
@@ -24,6 +24,7 @@ export class EditTaskPageComponent implements OnInit {
   taskForm!: FormGroup;
   taskId!: number;
   today: string;
+  originalPersonData: { [key: number]: IPerson } = {}; 
 
   constructor() {
     const currentDate = new Date();
@@ -42,8 +43,9 @@ export class EditTaskPageComponent implements OnInit {
         people: this.fb.array([]),
       });
 
-      task.people.forEach((person: IPerson) => {
+      task.people.forEach((person: IPerson, index: number) => {
         this.addPerson(person);
+        this.originalPersonData[index] = { ...person }; 
       });
     }
   }
@@ -74,6 +76,8 @@ export class EditTaskPageComponent implements OnInit {
   editPerson(index: number) {
     const person = this.people.at(index);
     person.get('isEditing')?.setValue(true);
+ 
+    this.originalPersonData[index] = { ...person.value };
   }
 
   savePerson(index: number) {
@@ -85,8 +89,18 @@ export class EditTaskPageComponent implements OnInit {
     }
   }
 
+  cancelEditPerson(index: number) {
+    const person = this.people.at(index);
+
+    if (this.originalPersonData[index]) {
+      person.patchValue(this.originalPersonData[index]);
+    }
+    person.get('isEditing')?.setValue(false);
+  }
+
   removePerson(index: number) {
     this.people.removeAt(index);
+    delete this.originalPersonData[index]; 
   }
 
   getSkills(personIndex: number): FormArray {

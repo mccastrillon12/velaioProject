@@ -1,30 +1,51 @@
-<div [formGroup]="personForm">
-  <label>Full Name</label>
-  <input 
-    formControlName="fullName" 
-    [ngClass]="{ 'duplicate-error': isNameDuplicate }" />
-  <div *ngIf="personForm.get('fullName')?.invalid && personForm.get('fullName')?.touched" class="error">
-    <div *ngIf="personForm.get('fullName')?.errors?.['required']">Full Name is required.</div>
-    <div *ngIf="personForm.get('fullName')?.errors?.['minlength']">Full Name must be at least 5 characters.</div>
-  </div>
-  <div *ngIf="isNameDuplicate" class="error">This name is already used. Please use a unique name.</div>
+<div class="person-form" [formGroup]="personForm">
 
-  <label>Age</label>
-  <input type="number" formControlName="age" />
-  <div *ngIf="personForm.get('age')?.invalid && personForm.get('age')?.touched" class="error">
-    <div *ngIf="personForm.get('age')?.errors?.['required']">Age is required.</div>
-    <div *ngIf="personForm.get('age')?.errors?.['min']">Age must be at least 18 years.</div>
+  <div class="person-form__group">
+    <label class="person-form__label">Full Name</label>
+    <input 
+      formControlName="fullName" 
+      class="person-form__input" 
+      [ngClass]="{ 'person-form__input--duplicate-error': isNameDuplicate }" 
+      placeholder="Enter full name" />
+    <div *ngIf="personForm.get('fullName')?.invalid && personForm.get('fullName')?.touched" class="person-form__error">
+      <div *ngIf="personForm.get('fullName')?.errors?.['required']">Full Name is required.</div>
+      <div *ngIf="personForm.get('fullName')?.errors?.['minlength']">Full Name must be at least 5 characters.</div>
+    </div>
+    <div *ngIf="isNameDuplicate" class="person-form__error">This name is already used. Please use a unique name.</div>
   </div>
 
-  <div formArrayName="skills">
-    <div *ngFor="let skill of skills.controls; let i = index">
-      <label>Skill</label>
-      <input [formControlName]="i" />
-      <div *ngIf="skill.invalid && skill.touched" class="error">
+
+  <div class="person-form__group">
+    <label class="person-form__label">Age</label>
+    <input 
+      type="number" 
+      formControlName="age" 
+      class="person-form__input" 
+      placeholder="Enter age" />
+    <div *ngIf="personForm.get('age')?.invalid && personForm.get('age')?.touched" class="person-form__error">
+      <div *ngIf="personForm.get('age')?.errors?.['required']">Age is required.</div>
+      <div *ngIf="personForm.get('age')?.errors?.['min']">Age must be at least 18 years.</div>
+    </div>
+  </div>
+
+
+  <div class="person-form__group person-form__group--skills" formArrayName="skills">
+    <div *ngFor="let skill of skills.controls; let i = index" class="person-form__skill">
+      <label class="person-form__label">Skill</label>
+      <input 
+        [formControlName]="i" 
+        class="person-form__input" 
+        placeholder="Enter skill" />
+      <div *ngIf="skill.invalid && skill.touched" class="person-form__error">
         <div *ngIf="skill.errors?.['required']">Skill is required.</div>
       </div>
-      <button type="button" *ngIf="i > 0" (click)="removeSkill(i)">Remove Skill</button>
+      <button type="button" *ngIf="i > 0" class="person-form__button person-form__button--remove" (click)="removeSkill(i)">Remove Skill</button>
     </div>
-    <button type="button" (click)="addSkill()">Add Skill</button>
+    <button type="button" class="person-form__button person-form__button--add" (click)="addSkill()">Add Skill</button>
+  </div>
+
+ 
+  <div class="person-form__actions">
+    <button type="button" class="person-form__button person-form__button--cancel" (click)="onCancel()">Cancelar</button>
   </div>
 </div>
