@@ -98,4 +98,7 @@ export class TaskFormComponent {
       this.taskForm.markAllAsTouched();
     }
   }
+  cancel() {
+    this.router.navigate(['/']); 
+  }
 }

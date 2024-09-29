@@ -27,7 +27,7 @@
   }
   
   .person-form__label {
-    color: #6a0dadcf;
+    color: #6a0dad;
     font-size: 12px;
     font-weight: bold;
   }
@@ -76,7 +76,7 @@
   }
   
   .person-form__button--add {
-    background-color: #6146c6;
+    background-color: #6a0dad;
     color: #ffffff;
   }
   
@@ -91,6 +91,20 @@
     opacity: 0.8;
   }
   
+   .person-form__actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.person-form__button--save{
+  background-color: #6a0dad;
+  color: #ffffff;
+  
+}
+.person-form__button--cancel{
+  border: 1px solid #6a0dad;
+}
+
   /* Responsive Styles for Desktop */
   @media (min-width: 768px) {
     .person-form__group {
@@ -118,5 +132,6 @@
       margin-left: 15px;
       margin-top: 0;
     }
+
   }
   

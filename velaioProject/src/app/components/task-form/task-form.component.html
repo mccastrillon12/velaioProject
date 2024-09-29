@@ -59,7 +59,12 @@
  
     <div class="task-form__actions">
       <button type="button" class="task-form__button task-form__button--add" (click)="addPerson()">Add Person</button>
-      <button type="submit" class="task-form__button task-form__button--submit">Save Task</button>
+      <div class="task-form__buttons">
+        <button type="submit" class="task-form__button task-form__button--submit">Save Task</button>
+        <button type="button" class="task-form__button task-form__button--cancel" (click)="cancel()">Cancel</button>
+      </div>
+
+
     </div>
   </form>
 </div>

@@ -54,7 +54,7 @@
   .task-form__icon--datepicker {
     position: absolute;
     right: 15px;
-    color: #6146c6; 
+    color: #6a0dad; 
   }
   
   .task-form__input, .task-form__input--icon, .task-form__input--date {
@@ -74,7 +74,7 @@
   }
   
   .task-form__label {
-    color: #6a0dadcf;
+    color: #6a0dad;
     font-size: 12px;
     font-weight: bold;
   }
@@ -85,7 +85,7 @@
   }
   
   .task-form__subtitle {
-    color: #6a0dadcf; 
+    color: #6a0dad; 
     font-size: 12px; 
       font-weight: bold; 
     margin-bottom: 10px;
@@ -116,26 +116,35 @@
   }
   
   .task-form__button--add {
-    background-color: #6146c6;
+    background-color: #6a0dad;
     color: #ffffff;
   }
-  
+
+
   .task-form__button--remove {
     background-color: #f44336;
     color: #ffffff;
   }
   
   .task-form__button--submit {
-    background-color: #61c877;
+    background-color: #6a0dad;
     color: #ffffff;
   }
   
-  .task-form__button:hover {
-    opacity: 0.8;
-  }
+
   
   .task-form__actions {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .task-form__buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
   }
   
+  .task-form__button--cancel{
+    border: 1px solid #6a0dad;
+  }
