@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { ITask } from '../../models/task.model';
 import { TaskService } from '../../service/task.service';
 import { IPerson } from '../../models/person.model';
+import { PersonFormComponent } from '../../components/person-form/person-form.component';
 
 @Component({
   selector: 'app-edit-task-page',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,PersonFormComponent],
   templateUrl: './edit-task-page.component.html',
   styleUrls: ['./edit-task-page.component.css'],
 })
@@ -49,6 +50,10 @@ export class EditTaskPageComponent implements OnInit {
 
   get people(): FormArray {
     return this.taskForm.get('people') as FormArray;
+  }
+
+  getPersonForm(index: number): FormGroup {
+    return this.people.at(index) as FormGroup;
   }
 
   addPerson(person?: IPerson) {
@@ -119,3 +124,4 @@ export class EditTaskPageComponent implements OnInit {
 }
   }
 }
+

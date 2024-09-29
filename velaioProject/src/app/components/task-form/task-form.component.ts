@@ -23,17 +23,21 @@ export class TaskFormComponent {
   constructor() {
     const currentDate = new Date();
     currentDate.setHours(0, 0, 0, 0);
-    this.today = currentDate.toISOString().split('T')[0]; }
+    this.today = currentDate.toISOString().split('T')[0];
+  }
 
   taskForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(3)]],
     deadline: ['', Validators.required],
     persons: this.fb.array([]),
-    duplicateNamesError: [false], 
   });
 
   get persons(): FormArray {
     return this.taskForm.get('persons') as FormArray;
+  }
+
+  getPersonForm(index: number): FormGroup {
+    return this.persons.at(index) as FormGroup;
   }
 
   addPerson() {
@@ -48,26 +52,6 @@ export class TaskFormComponent {
 
   removePerson(index: number) {
     this.persons.removeAt(index);
-  }
-
-  addSkill(personIndex: number) {
-    const skills = this.getSkills(personIndex);
-    skills.push(new FormControl('', Validators.required));
-  }
-
-  removeSkill(personIndex: number, skillIndex: number) {
-    const skills = this.getSkills(personIndex);
-    skills.removeAt(skillIndex);
-  }
-
-  getSkills(personIndex: number): FormArray {
-    return this.persons.at(personIndex).get('skills') as FormArray;
-  }
-
-  hasDuplicateNames(): boolean {
-    const names = this.persons.controls.map(control => control.get('fullName')?.value);
-    const uniqueNames = new Set(names);
-    return uniqueNames.size !== names.length;
   }
 
   isNameDuplicate(index: number): boolean {
@@ -86,20 +70,19 @@ export class TaskFormComponent {
       };
       this.taskService.addTask(newTask);
 
-
       this.taskForm.reset();
-      this.persons.clear(); 
-      this.addPerson(); 
+      this.persons.clear();
+      this.addPerson();
 
       this.router.navigate(['/all-tasks']);
     } else {
-
-      if (this.hasDuplicateNames()) {
-        this.taskForm.get('duplicateNamesError')?.setValue(true);
-      } else {
-        this.taskForm.get('duplicateNamesError')?.setValue(false);
-      }
       this.taskForm.markAllAsTouched();
     }
+  }
+
+  hasDuplicateNames(): boolean {
+    const names = this.persons.controls.map(control => control.get('fullName')?.value);
+    const uniqueNames = new Set(names);
+    return uniqueNames.size !== names.length;
   }
 }
