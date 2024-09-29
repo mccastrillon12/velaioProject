@@ -1,9 +1,8 @@
 <div class="container">
-    <h1>Welcome to the Task Management App</h1>
-    <button routerLink="/create-task">Add New Task</button>
-    <button routerLink="/all-tasks">View More</button>
-    <hr />
-    <h2>Task List</h2>
-    <app-task-list></app-task-list>
-  </div>
-  
+  <h1>Welcome to the Task Management App</h1>
+  <button routerLink="/create-task">Add New Task</button>
+  <button routerLink="/all-tasks">View More</button>
+  <hr />
+  <h2>Task List</h2>
+  <app-task-list [tasks]="tasks"></app-task-list>
+</div>
