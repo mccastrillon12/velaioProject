@@ -1,35 +1,51 @@
-<div class="container">
-  <h1>Create Task</h1>
-  <form [formGroup]="taskForm" (ngSubmit)="saveTask()">
+<div class="task-form__container">
+  <h1 class="task-form__title">Create Task</h1>
+  <form class="task-form__form" [formGroup]="taskForm" (ngSubmit)="saveTask()">
 
-    <div>
-      <label for="name">Task Name</label>
-      <input id="name" formControlName="name" />
-      <div *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched" class="error">
+ 
+    <div class="task-form__group task-form__group--icon">
+      <label for="name" class="task-form__label">Task Name</label>
+      <div class="task-form__input-group">
+        <span class="task-form__icon">
+          <i class="fas fa-tasks"></i>
+        </span>
+        <input id="name" class="task-form__input task-form__input--icon" formControlName="name" placeholder="Enter task name" />
+      </div>
+      <div *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched" class="task-form__error">
         <div *ngIf="taskForm.get('name')?.errors?.['required']">Task Name is required.</div>
         <div *ngIf="taskForm.get('name')?.errors?.['minlength']">Task Name must be at least 3 characters.</div>
       </div>
     </div>
 
-    <div>
-      <label for="deadline">Deadline</label>
-      <input type="date" id="deadline" formControlName="deadline" [min]="today" />
-      <div *ngIf="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched" class="error">
+
+    <div class="task-form__group task-form__group--icon">
+      <label for="deadline" class="task-form__label">Deadline</label>
+      <div class="task-form__input-group">
+        <span class="task-form__icon">
+          <i class="fas fa-calendar-alt"></i>
+        </span>
+        <input type="date" id="deadline" class="task-form__input task-form__input--date" formControlName="deadline" [min]="today" placeholder="mm/dd/yyyy" />
+      </div>
+      <div *ngIf="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched" class="task-form__error">
         <div *ngIf="taskForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
       </div>
     </div>
 
-    <div formArrayName="persons">
-      <h2>People</h2>
-      <ul>
-        <li *ngFor="let person of persons.controls; let i = index" [formGroupName]="i">
+
+    <div class="task-form__group" formArrayName="persons" *ngIf="persons.length > 0">
+      <h2 class="task-form__subtitle">People</h2>
+      <ul class="task-form__list">
+        <li *ngFor="let person of persons.controls; let i = index" [formGroupName]="i" class="task-form__list-item">
           <app-person-form [personForm]="getPersonForm(i)" [isNameDuplicate]="isNameDuplicate(i)"></app-person-form>
-          <button type="button" (click)="removePerson(i)">Remove Person</button>
+          <button type="button" class="task-form__button task-form__button--remove" (click)="removePerson(i)">Remove Person</button>
         </li>
       </ul>
     </div>
 
-    <button type="button" (click)="addPerson()">Add Person</button>
-    <button type="submit">Save Task</button>
+
+    <div class="task-form__actions">
+      <button type="button" class="task-form__button task-form__button--add" (click)="addPerson()">Add Person</button>
+      <button type="submit" class="task-form__button task-form__button--submit">Save Task</button>
+    </div>
   </form>
 </div>
