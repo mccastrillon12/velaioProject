@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -10,9 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./person-form.component.css']
 })
 export class PersonFormComponent {
-  private fb = inject(FormBuilder);
-
   @Input() personForm!: FormGroup;
+  @Input() isNameDuplicate!: boolean;
+
+  private fb = inject(FormBuilder);
 
   get skills(): FormArray {
     return this.personForm.get('skills') as FormArray;
@@ -28,3 +29,5 @@ export class PersonFormComponent {
     }
   }
 }
+
+
