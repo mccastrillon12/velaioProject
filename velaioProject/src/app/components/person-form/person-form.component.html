@@ -14,7 +14,6 @@
     <div *ngIf="isNameDuplicate" class="person-form__error">This name is already used. Please use a unique name.</div>
   </div>
 
-
   <div class="person-form__group">
     <label class="person-form__label">Age</label>
     <input 
@@ -27,7 +26,6 @@
       <div *ngIf="personForm.get('age')?.errors?.['min']">Age must be at least 18 years.</div>
     </div>
   </div>
-
 
   <div class="person-form__group person-form__group--skills" formArrayName="skills">
     <div *ngFor="let skill of skills.controls; let i = index" class="person-form__skill">
@@ -44,8 +42,8 @@
     <button type="button" class="person-form__button person-form__button--add" (click)="addSkill()">Add Skill</button>
   </div>
 
- 
   <div class="person-form__actions">
+    <button type="button" class="person-form__button person-form__button--save" (click)="onSave()">Save</button>
     <button type="button" class="person-form__button person-form__button--cancel" (click)="onCancel()">Cancelar</button>
   </div>
 </div>

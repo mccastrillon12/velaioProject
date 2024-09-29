@@ -12,7 +12,8 @@ import { CommonModule } from '@angular/common';
 export class PersonFormComponent {
   @Input() personForm!: FormGroup;
   @Input() isNameDuplicate!: boolean;
-  @Output() cancel = new EventEmitter<void>(); 
+  @Output() cancel = new EventEmitter<void>();
+  @Output() save = new EventEmitter<void>();
 
   private fb = inject(FormBuilder);
 
@@ -30,7 +31,15 @@ export class PersonFormComponent {
     }
   }
 
+  onSave() {
+    if (this.personForm.valid) {
+      this.save.emit(); 
+    } else {
+      this.personForm.markAllAsTouched();
+    }
+  }
+
   onCancel() {
-    this.cancel.emit(); 
+    this.cancel.emit();
   }
 }

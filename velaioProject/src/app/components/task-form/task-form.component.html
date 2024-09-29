@@ -2,7 +2,7 @@
   <h1 class="task-form__title">Create Task</h1>
   <form class="task-form__form" [formGroup]="taskForm" (ngSubmit)="saveTask()">
 
-    <!-- Task Name -->
+
     <div class="task-form__group task-form__group--icon">
       <label for="name" class="task-form__label">Task Name</label>
       <div class="task-form__input-group">
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <!-- Deadline -->
+
     <div class="task-form__group task-form__group--icon">
       <label for="deadline" class="task-form__label">Deadline</label>
       <div class="task-form__input-group">
@@ -31,18 +31,32 @@
       </div>
     </div>
 
-    <!-- Persons -->
+  
     <div class="task-form__group" formArrayName="persons" *ngIf="persons.length > 0">
       <h2 class="task-form__subtitle">People</h2>
       <ul class="task-form__list">
-        <li *ngFor="let person of persons.controls; let i = index" [formGroupName]="i" class="task-form__list-item">
-          <app-person-form [personForm]="getPersonForm(i)" [isNameDuplicate]="isNameDuplicate(i)" (cancel)="removePerson(i)"></app-person-form>
-          <button type="button" class="task-form__button task-form__button--remove" (click)="removePerson(i)">Remove Person</button>
+        <li *ngFor="let person of persons.controls; let i = index" class="task-form__list-item">
+          <div *ngIf="person.get('isEditing')?.value" [formGroupName]="i">
+            <app-person-form 
+              [personForm]="getPersonForm(i)" 
+              [isNameDuplicate]="isNameDuplicate(i)" 
+              (cancel)="removePerson(i)"
+              (save)="onSavePerson(i)">
+            </app-person-form>
+          </div>
+          <div *ngIf="!person.get('isEditing')?.value">
+            <strong>{{ person.get('fullName')?.value }}</strong> ({{ person.get('age')?.value }} years old)
+            <ul>
+              <li *ngFor="let skill of getSkills(i).controls">{{ skill.value }}</li>
+            </ul>
+            <button type="button" class="task-form__button task-form__button--edit" (click)="editPerson(i)">Edit</button>
+            <button type="button" class="task-form__button task-form__button--remove" (click)="removePerson(i)">Delete</button>
+          </div>
         </li>
       </ul>
     </div>
 
-    <!-- Actions -->
+ 
     <div class="task-form__actions">
       <button type="button" class="task-form__button task-form__button--add" (click)="addPerson()">Add Person</button>
       <button type="submit" class="task-form__button task-form__button--submit">Save Task</button>

@@ -40,14 +40,28 @@ export class TaskFormComponent {
     return this.persons.at(index) as FormGroup;
   }
 
+  getSkills(personIndex: number): FormArray {
+    return this.getPersonForm(personIndex).get('skills') as FormArray;
+  }
+
   addPerson() {
     const personForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(5)]],
       age: ['', [Validators.required, Validators.min(18)]],
       skills: this.fb.array([this.fb.control('', Validators.required)]),
-    });
+      isEditing: [true],     });
 
     this.persons.push(personForm);
+  }
+
+  editPerson(index: number) {
+    const person = this.persons.at(index);
+    person.get('isEditing')?.setValue(true);
+  }
+
+  onSavePerson(index: number) {
+    const person = this.persons.at(index);
+    person.get('isEditing')?.setValue(false);
   }
 
   removePerson(index: number) {
@@ -58,6 +72,12 @@ export class TaskFormComponent {
     const currentName = this.persons.at(index).get('fullName')?.value;
     const names = this.persons.controls.map(control => control.get('fullName')?.value);
     return names.filter(name => name === currentName).length > 1;
+  }
+
+  hasDuplicateNames(): boolean {
+    const names = this.persons.controls.map(control => control.get('fullName')?.value);
+    const uniqueNames = new Set(names);
+    return uniqueNames.size !== names.length;
   }
 
   saveTask() {
@@ -72,17 +92,10 @@ export class TaskFormComponent {
 
       this.taskForm.reset();
       this.persons.clear();
-      this.addPerson();
 
       this.router.navigate(['/all-tasks']);
     } else {
       this.taskForm.markAllAsTouched();
     }
-  }
-
-  hasDuplicateNames(): boolean {
-    const names = this.persons.controls.map(control => control.get('fullName')?.value);
-    const uniqueNames = new Set(names);
-    return uniqueNames.size !== names.length;
   }
 }

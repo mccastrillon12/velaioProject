@@ -2,7 +2,6 @@
   <h1>Edit Task</h1>
   <form [formGroup]="taskForm" (ngSubmit)="saveTask()">
 
-
     <div>
       <label for="name">Task Name</label>
       <input id="name" formControlName="name" />
@@ -12,7 +11,6 @@
       </div>
     </div>
 
-
     <div>
       <label for="deadline">Deadline</label>
       <input type="date" id="deadline" formControlName="deadline" [min]="today" />
@@ -20,7 +18,6 @@
         <div *ngIf="taskForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
       </div>
     </div>
-
 
     <div formArrayName="people">
       <h2>People</h2>
@@ -30,9 +27,9 @@
             <app-person-form 
               [personForm]="getPersonForm(i)" 
               [isNameDuplicate]="isNameDuplicate(i)" 
-              (cancel)="cancelEditPerson(i)">
+              (cancel)="cancelEditPerson(i)"
+              (save)="onSavePerson(i)">
             </app-person-form>
-            <button type="button" (click)="savePerson(i)">Save Person</button>
           </div>
           <div *ngIf="!person.get('isEditing')?.value">
             <strong>{{ person.get('fullName')?.value }}</strong> ({{ person.get('age')?.value }} years old)
@@ -46,7 +43,6 @@
       </ul>
     </div>
 
- 
     <button type="button" (click)="addPerson()">Add Person</button>
     <button type="submit">Save Task</button>
     <button type="button" (click)="markTaskAsCompleted()" class="complete-task-btn">Complete Task</button>
