@@ -1,16 +1,18 @@
 <div [formGroup]="personForm">
-    <label>Full Name</label>
-    <input formControlName="fullName" />
-    
-    <label>Age</label>
-    <input type="number" formControlName="age" />
+  <label>Full Name</label>
+  <input formControlName="fullName" />
+
+  <label>Age</label>
+  <input type="number" formControlName="age" />
+
   
-    <div formArrayName="skills">
-      <div *ngFor="let skill of skills.controls; let i = index">
-        <label>Skill</label>
-        <input [formControlName]="i" />
-        <button type="button" (click)="removeSkill(i)">Remove Skill</button>
-      </div>
-      <button type="button" (click)="addSkill()">Add Skill</button>
+  <div formArrayName="skills">
+    <div *ngFor="let skill of skills.controls; let i = index">
+      <label>Skill</label>
+      <input [formControlName]="i" />
+     
+      <button type="button" *ngIf="i > 0" (click)="removeSkill(i)">Remove Skill</button>
     </div>
+    <button type="button" (click)="addSkill()">Add Skill</button>
   </div>
+</div>
