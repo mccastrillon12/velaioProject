@@ -1,5 +1,8 @@
 .error {
-    color: red;
-    font-size: 0.9em;
-    margin-top: 4px;
-  }
+  color: red;
+  font-size: 0.9em;
+  margin-top: 4px;
+}
+.duplicate-error {
+  border: 2px solid red;
+}

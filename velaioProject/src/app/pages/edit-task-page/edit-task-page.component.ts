@@ -96,13 +96,26 @@ export class EditTaskPageComponent implements OnInit {
     this.getSkills(personIndex).removeAt(skillIndex);
   }
 
+  hasDuplicateNames(): boolean {
+    const names = this.people.controls.map(control => control.get('fullName')?.value);
+    const uniqueNames = new Set(names);
+    return uniqueNames.size !== names.length;
+  }
+  isNameDuplicate(index: number): boolean {
+    const currentName = this.people.at(index).get('fullName')?.value;
+    const names = this.people.controls.map(control => control.get('fullName')?.value);
+    return names.filter(name => name === currentName).length > 1;
+  }
+
   saveTask() {
-    if (this.taskForm.valid) {
+    if (this.taskForm.valid && !this.hasDuplicateNames()) {
       const updatedTask: Partial<ITask> = {
         ...this.taskForm.value,
       };
       this.taskService.updateTask(this.taskId, updatedTask);
       this.router.navigate(['/all-tasks']);
-    }
+    }else {
+      this.taskForm.markAllAsTouched();
+}
   }
 }

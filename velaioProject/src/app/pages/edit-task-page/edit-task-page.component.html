@@ -1,7 +1,7 @@
 <div class="container">
   <h1>Edit Task</h1>
   <form [formGroup]="taskForm" (ngSubmit)="saveTask()">
- 
+
     <div>
       <label for="name">Task Name</label>
       <input id="name" formControlName="name" />
@@ -20,20 +20,21 @@
       </div>
     </div>
 
- 
+   
     <div formArrayName="people">
       <h2>People</h2>
       <ul>
         <li *ngFor="let person of people.controls; let i = index">
-         
+      
           <div *ngIf="person.get('isEditing')?.value" [formGroupName]="i">
             <label>Full Name</label>
-            <input formControlName="fullName" />
+            <input formControlName="fullName" 
+            [ngClass]="{ 'duplicate-error': isNameDuplicate(i) }"/>
             <div *ngIf="person.get('fullName')?.invalid && person.get('fullName')?.touched" class="error">
               <div *ngIf="person.get('fullName')?.errors?.['required']">Full Name is required.</div>
               <div *ngIf="person.get('fullName')?.errors?.['minlength']">Full Name must be at least 5 characters.</div>
             </div>
-
+            <div *ngIf="isNameDuplicate(i)" class="error">This name is already used. Please use a unique name.</div>
             <label>Age</label>
             <input type="number" formControlName="age" />
             <div *ngIf="person.get('age')?.invalid && person.get('age')?.touched" class="error">
@@ -41,7 +42,7 @@
               <div *ngIf="person.get('age')?.errors?.['min']">Age must be at least 18 years.</div>
             </div>
 
-          
+        
             <div formArrayName="skills">
               <div *ngFor="let skill of getSkills(i).controls; let j = index">
                 <label>Skill</label>
@@ -54,11 +55,11 @@
               <button type="button" (click)="addSkill(i)">Add Skill</button>
             </div>
 
-           
+         
             <button type="button" (click)="savePerson(i)">Save</button>
           </div>
 
-      
+    
           <div *ngIf="!person.get('isEditing')?.value">
             {{ person.get('fullName')?.value }} ({{ person.get('age')?.value }} years old)
             <ul>
