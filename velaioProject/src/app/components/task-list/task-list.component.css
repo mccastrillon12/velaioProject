@@ -199,3 +199,7 @@ padding: 0;
     background-color: #5c0da3;
   }
   
+  .deadline{
+    display: flex;
+    flex-direction: column;
+  }
