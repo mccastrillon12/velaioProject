@@ -207,10 +207,12 @@
 .task-form__img-button:hover {
   opacity: 0.7;
 }
+
 .task-form__button--delete {
   background-color: black;
   color: white;
 }
+
 .task-form__header {
   display: flex;
   align-items: center; 
@@ -228,14 +230,12 @@
   background: #6a0dad;
   padding: 5px;
   border-radius: 100%;
-
 }
 
 .task-form__home-icon {
   width: 20px; 
   height: 20px; 
 }
-
 
 :root {
   --primary-color: #6a0dad;

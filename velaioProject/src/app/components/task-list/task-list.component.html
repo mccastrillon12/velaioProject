@@ -5,7 +5,6 @@
   </div>
 
   <div class="task-card__content">
-
     <div class="task-card__team">
       <p class="task-card__team-title">Team</p>
       <div *ngIf="task.people.length > 0; else noPeopleAssigned" class="task-card__team-members">
@@ -33,7 +32,6 @@
       </ng-template>
     </div>
 
-
     <div class="task-card__progress">
       <div *ngIf="task.isCompleted" class="task-card__progress-circle">
         <svg viewBox="0 0 36 36" class="task-card__progress-svg">
@@ -47,7 +45,6 @@
       <div *ngIf="!task.isCompleted" class="task-card__progress-text">Pending</div>
     </div>
   </div>
-
 
   <div class="task-card__footer">
     <div class="task-card__deadline">

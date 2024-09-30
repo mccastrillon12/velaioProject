@@ -15,6 +15,7 @@ import { IPerson } from '../../models/person.model';
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css'],
 })
+
 export class TaskFormComponent implements OnInit {
   @Input() taskToEdit?: ITask;
   @Output() taskSaved = new EventEmitter<void>();
@@ -186,10 +187,7 @@ export class TaskFormComponent implements OnInit {
         people: this.persons.value,
       };
       this.taskService.updateTask(this.taskToEdit.id, updatedTask);
-
-
       this.taskToEdit.isCompleted = true;
-
       this.taskSaved.emit();
     }
   }
