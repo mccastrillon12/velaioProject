@@ -10,15 +10,11 @@
       <p class="task-card__team-title">Team</p>
       <div *ngIf="task.people.length > 0; else noPeopleAssigned" class="task-card__team-members">
         <div *ngFor="let person of task.people.slice(0, 3); let i = index" class="task-card__team-member">
-          <span
-            class="task-card__team-initial"
-            [ngClass]="{
+          <span class="task-card__team-initial" [ngClass]="{
               'task-card__team-initial--dark': i % 3 === 0,
               'task-card__team-initial--medium': i % 3 === 1,
               'task-card__team-initial--light': i % 3 === 2
-            }"
-            title="{{ person.fullName }}"
-          >
+            }" title="{{ person.fullName }}">
             {{ person.fullName.charAt(0) }}
           </span>
           <div class="task-card__team-info">
@@ -41,8 +37,10 @@
     <div class="task-card__progress">
       <div *ngIf="task.isCompleted" class="task-card__progress-circle">
         <svg viewBox="0 0 36 36" class="task-card__progress-svg">
-          <path class="task-card__progress-background" d="M18 2.0845a 15.9155 15.9155 0 1 0 0 31.831 15.9155 15.9155 0 1 0 0-31.831" />
-          <path class="task-card__progress-stroke" stroke-dasharray="100, 100" d="M18 2.0845a 15.9155 15.9155 0 1 0 0 31.831 15.9155 15.9155 0 1 0 0-31.831" />
+          <path class="task-card__progress-background"
+            d="M18 2.0845a 15.9155 15.9155 0 1 0 0 31.831 15.9155 15.9155 0 1 0 0-31.831" />
+          <path class="task-card__progress-stroke" stroke-dasharray="100, 100"
+            d="M18 2.0845a 15.9155 15.9155 0 1 0 0 31.831 15.9155 15.9155 0 1 0 0-31.831" />
         </svg>
         <span class="task-card__progress-percentage">100%</span>
       </div>
@@ -58,7 +56,7 @@
         <span>Deadline</span>
         <span>{{ task.deadline | date }}</span>
       </div>
-  
+
     </div>
     <button [routerLink]="['/edit-task', task.id]" class="task-card__edit-btn">Edit</button>
   </div>

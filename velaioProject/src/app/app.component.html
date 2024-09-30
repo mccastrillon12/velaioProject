@@ -6,13 +6,10 @@
         {{ isMenuOpen ? 'X' : '+' }}
       </span>
     </button>
-  
+
     <div class="floating-menu" *ngIf="isMenuOpen">
       <button class="menu-item" (click)="navigateTo('/create-task')">Add Task</button>
       <button class="menu-item" (click)="navigateTo('/all-tasks')">All Task</button>
     </div>
   </div>
-  
-  
-  
 </div>

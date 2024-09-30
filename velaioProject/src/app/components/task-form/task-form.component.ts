@@ -11,7 +11,7 @@ import { IPerson } from '../../models/person.model';
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PersonFormComponent,RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, PersonFormComponent, RouterModule],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css'],
 })

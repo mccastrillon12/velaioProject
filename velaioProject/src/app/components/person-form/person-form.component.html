@@ -1,11 +1,8 @@
 <div class="person-form" [formGroup]="personForm">
   <div class="person-form__group">
     <label class="person-form__label">Full Name</label>
-    <input 
-      formControlName="fullName" 
-      class="person-form__input" 
-      [ngClass]="{ 'person-form__input--duplicate-error': isNameDuplicate }" 
-      placeholder="Enter full name" />
+    <input formControlName="fullName" class="person-form__input"
+      [ngClass]="{ 'person-form__input--duplicate-error': isNameDuplicate }" placeholder="Enter full name" />
     <div *ngIf="personForm.get('fullName')?.invalid && personForm.get('fullName')?.touched" class="person-form__error">
       <div *ngIf="personForm.get('fullName')?.errors?.['required']">Full Name is required.</div>
       <div *ngIf="personForm.get('fullName')?.errors?.['minlength']">Full Name must be at least 5 characters.</div>
@@ -15,11 +12,7 @@
 
   <div class="person-form__group">
     <label class="person-form__label">Age</label>
-    <input 
-      type="number" 
-      formControlName="age" 
-      class="person-form__input" 
-      placeholder="Enter age" />
+    <input type="number" formControlName="age" class="person-form__input" placeholder="Enter age" />
     <div *ngIf="personForm.get('age')?.invalid && personForm.get('age')?.touched" class="person-form__error">
       <div *ngIf="personForm.get('age')?.errors?.['required']">Age is required.</div>
       <div *ngIf="personForm.get('age')?.errors?.['min']">Age must be at least 18 years.</div>
@@ -30,21 +23,13 @@
     <div class="person-form__group person-form__group--skills">
       <label class="person-form__label">Skill</label>
       <div *ngFor="let skill of skills.controls; let i = index" class="person-form__skill">
-        
-        <input 
-          [formControlName]="i" 
-          class="person-form__input" 
-          placeholder="Enter skill" />
+
+        <input [formControlName]="i" class="person-form__input" placeholder="Enter skill" />
         <div *ngIf="skill.invalid && skill.touched" class="person-form__error">
           <div *ngIf="skill.errors?.['required']">Skill is required.</div>
         </div>
-        <img 
-          *ngIf="i > 0" 
-          src="assets/delete.png" 
-          alt="Remove Skill" 
-          class="person-form__img-remove" 
-          (click)="confirmRemoveSkill(i)"
-        />
+        <img *ngIf="i > 0" src="assets/delete.png" alt="Remove Skill" class="person-form__img-remove"
+          (click)="confirmRemoveSkill(i)" />
       </div>
     </div>
     <div class="person-form__add-skill">

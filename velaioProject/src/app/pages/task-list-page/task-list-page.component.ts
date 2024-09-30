@@ -5,11 +5,12 @@ import { ITask } from '../../models/task.model';
 
 import { TaskService } from '../../service/task.service';
 import { TaskFilterComponent } from '../../components/task-filter/task-filter.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-task-list-page',
   standalone: true,
-  imports: [CommonModule, TaskListComponent, TaskFilterComponent],
+  imports: [CommonModule, TaskListComponent, TaskFilterComponent, RouterModule],
   templateUrl: './task-list-page.component.html',
   styleUrls: ['./task-list-page.component.css'],
 })
@@ -19,7 +20,7 @@ export class TaskListPageComponent {
   filteredTasks: ITask[] = [];
 
   constructor() {
- 
+
     this.tasks$.subscribe((tasks) => {
       this.filteredTasks = tasks;
     });

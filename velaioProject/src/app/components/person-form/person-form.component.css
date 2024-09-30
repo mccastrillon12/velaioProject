@@ -52,7 +52,7 @@
   align-items: center;
   gap: 0.3125rem;
   margin-bottom: 0.625rem;
-  flex-wrap: wrap; /* Asegura que el contenido no se desborde */
+  flex-wrap: wrap; 
   width: 100%;
 }
 
@@ -79,7 +79,7 @@
   align-items: center;
   justify-content: center;
   min-width: 100px;
-  max-width: 100%; /* Evita que los botones se desborden */
+  max-width: 100%; 
   box-sizing: border-box;
 }
 
@@ -87,7 +87,7 @@
   background-color: transparent;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
-  width: 100%; /* Asegura que el botón se mantenga dentro del contenedor */
+  width: 100%; 
 }
 
 .person-form__button--save {
@@ -110,23 +110,23 @@
   justify-content: end;
   gap: 10px;
   padding-bottom: 0.9375rem;
-  flex-wrap: wrap; /* Asegura que los botones no se desborden */
+  flex-wrap: wrap; 
 }
 
 .person-form__add-skill {
   align-self: flex-end;
   margin-bottom: 10px;
-  width: 100%; /* Asegura que el botón se mantenga dentro del contenedor */
+  width: 100%; 
 }
 
 @media (min-width: 768px) {
   .person-form__add-skill {
-    width: auto; /* Ajusta el ancho para escritorio */
-    align-self: flex-start; /* Mueve el botón a la izquierda */
+    width: auto; 
+    align-self: flex-start; 
   }
 
   .person-form__button--add {
-    width: auto; /* Asegura que el botón no ocupe todo el ancho en escritorio */
+    width: auto; 
   }
 }
 
@@ -142,7 +142,6 @@
   }
 }
 
-/* Variables de color */
 :root {
   --primary-color: #6a0dad;
   --danger-color: #ff4d4f;
