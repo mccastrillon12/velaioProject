@@ -6,6 +6,11 @@
     margin-bottom: 1.25rem; 
   }
   
+  .date {
+    display: flex;
+    gap: 5px;
+}
+
   .date p {
     font-size: 0.8125rem;
     margin-right: 0.5rem;
@@ -188,6 +193,20 @@
     text-align: center;
     align-items: center;
     }
+
+    .more-tasks-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        color: #333;
+        font-size: 0.8rem;
+        font-weight: bold;
+    padding: 0;
+      }
   
   @media (min-width: var(--breakpoint-md)) {
     .header {

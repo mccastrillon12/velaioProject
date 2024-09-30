@@ -177,7 +177,7 @@
 }
 
 .task-form__button--complete {
-  background-color: #28a745;
+  background-color: #166b00;
   color: #ffffff;
 }
 
@@ -209,7 +209,7 @@
   opacity: 0.7;
 }
 .task-form__button--delete {
-  background-color: #cb0002;
+  background-color: black;
   color: white;
 }
 
