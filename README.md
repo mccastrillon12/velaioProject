@@ -10,11 +10,6 @@ Welcome to the **Velaio Project**, a task management application designed to cre
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Project](#running-the-project)
-- [Usage](#usage)
-- [Components Overview](#components-overview)
-  - [BaseTaskFormComponent](#basetaskformcomponent)
-  - [TaskFormComponent](#taskformcomponent)
-  - [EditTaskPageComponent](#edittaskpagecomponent)
 - [Folder Structure](#folder-structure)
 
 
