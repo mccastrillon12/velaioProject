@@ -1,25 +1,24 @@
 <div class="task-form__container">
-  <h1 class="task-form__title">Create Task</h1>
+  <h1 class="task-form__title">{{ taskToEdit ? 'Editar Tarea' : 'Crear Tarea' }}</h1>
   <form class="task-form__form" [formGroup]="taskForm" (ngSubmit)="saveTask()">
 
-
+ 
     <div class="task-form__group">
-      <label for="name" class="task-form__label">Task Name</label>
+      <label for="name" class="task-form__label">Nombre de la Tarea</label>
       <div class="task-form__input-group">
         <span class="task-form__icon">
           <i class="fas fa-tasks"></i>
         </span>
-        <input id="name" class="task-form__input" formControlName="name" placeholder="Enter task name" />
+        <input id="name" class="task-form__input" formControlName="name" placeholder="Ingrese el nombre de la tarea" />
       </div>
       <div *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched" class="task-form__error">
-        <div *ngIf="taskForm.get('name')?.errors?.['required']">Task Name is required.</div>
-        <div *ngIf="taskForm.get('name')?.errors?.['minlength']">Task Name must be at least 3 characters.</div>
+        <div *ngIf="taskForm.get('name')?.errors?.['required']">El nombre de la tarea es requerido.</div>
+        <div *ngIf="taskForm.get('name')?.errors?.['minlength']">El nombre de la tarea debe tener al menos 3 caracteres.</div>
       </div>
     </div>
 
-
     <div class="task-form__group">
-      <label for="deadline" class="task-form__label">Deadline</label>
+      <label for="deadline" class="task-form__label">Fecha Límite</label>
       <div class="task-form__input-group">
         <span class="task-form__icon">
           <i class="fas fa-calendar-alt"></i>
@@ -27,13 +26,13 @@
         <input type="date" id="deadline" class="task-form__input" formControlName="deadline" [min]="today" placeholder="mm/dd/yyyy" />
       </div>
       <div *ngIf="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched" class="task-form__error">
-        <div *ngIf="taskForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
+        <div *ngIf="taskForm.get('deadline')?.errors?.['required']">La fecha límite es requerida.</div>
       </div>
     </div>
 
 
     <div class="task-form__group" formArrayName="persons" *ngIf="persons.length > 0">
-      <h2 class="task-form__subtitle">People</h2>
+      <h2 class="task-form__subtitle">Personas</h2>
       <ul class="task-form__list">
         <li *ngFor="let person of persons.controls; let i = index" class="task-form__list-item">
           <div *ngIf="person.get('isEditing')?.value" [formGroupName]="i">
@@ -45,12 +44,12 @@
             </app-person-form>
           </div>
           <div *ngIf="!person.get('isEditing')?.value">
-            <strong>{{ person.get('fullName')?.value }}</strong> ({{ person.get('age')?.value }} years old)
+            <strong>{{ person.get('fullName')?.value }}</strong> ({{ person.get('age')?.value }} años)
             <ul>
               <li *ngFor="let skill of getSkills(i).controls">{{ skill.value }}</li>
             </ul>
-            <button type="button" class="task-form__button task-form__button--edit" (click)="editPerson(i)">Edit</button>
-            <button type="button" class="task-form__button task-form__button--remove" (click)="removePerson(i)">Delete</button>
+            <button type="button" class="task-form__button task-form__button--edit" (click)="editPerson(i)">Editar</button>
+            <button type="button" class="task-form__button task-form__button--remove" (click)="removePerson(i)">Eliminar</button>
           </div>
         </li>
       </ul>
@@ -58,12 +57,14 @@
 
 
     <div class="task-form__actions">
-      <button type="button" *ngIf="!isAddingPerson" class="task-form__button task-form__button--add" (click)="addPerson()">Add Person</button>
+      <button type="button" *ngIf="!isAddingPerson" class="task-form__button task-form__button--add" (click)="addPerson()">Agregar Persona</button>
       <div class="task-form__buttons">
-        <button type="submit" class="task-form__button task-form__button--submit">Save Task</button>
-        <button type="button" class="task-form__button task-form__button--cancel" (click)="cancel()">Cancel</button>
+        <button type="submit" class="task-form__button task-form__button--submit">Guardar Tarea</button>
+        <button type="button" class="task-form__button task-form__button--cancel" (click)="cancel()">Cancelar</button>
+        <button *ngIf="taskToEdit" type="button" (click)="markTaskAsCompleted()" class="task-form__button task-form__button--complete">
+          Completar Tarea
+        </button>
       </div>
-    
     </div>
   </form>
 </div>
