@@ -28,7 +28,6 @@ export class HomePageComponent {
       day: 'numeric'
     });
 
-
     this.taskService.tasks$.subscribe(tasks => {
       this.tasks = tasks;
       this.calculateCompletionPercentage();

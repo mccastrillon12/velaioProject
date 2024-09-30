@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './person-form.component.html',
   styleUrls: ['./person-form.component.css']
 })
+
 export class PersonFormComponent {
   @Input() personForm!: FormGroup;
   @Input() isNameDuplicate!: boolean;
@@ -35,7 +36,6 @@ export class PersonFormComponent {
           this.removeSkill(index);
         }
       } else {
-
         this.removeSkill(index);
       }
     }

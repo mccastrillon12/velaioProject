@@ -26,7 +26,6 @@ export class TaskListPageComponent {
     });
   }
 
-
   onFilterChanged(filter: string) {
     this.tasks$.subscribe((tasks) => {
       switch (filter) {
