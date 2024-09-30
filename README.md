@@ -16,8 +16,7 @@ Welcome to the **Velaio Project**, a task management application designed to cre
   - [TaskFormComponent](#taskformcomponent)
   - [EditTaskPageComponent](#edittaskpagecomponent)
 - [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## About the Project
 
@@ -107,6 +106,9 @@ velaioProject/
 │   │   │   ├── task-form/
 │   │   │   │   ├── task-form.component.ts
 │   │   │   │   ├── task-form.component.html
+│   │   │   ├── task-list/
+│   │   │   │   ├── task-list.component.ts
+│   │   │   │   ├── task-list.component.html
 │   │   ├── pages/
 │   │   │   ├── task-create/
 │   │   │   │   ├── task-create.component.ts
@@ -114,10 +116,19 @@ velaioProject/
 │   │   │   ├── edit-task-page/
 │   │   │   │   ├── edit-task-page.component.ts
 │   │   │   │   ├── edit-task-page.component.html
+│   │   │   ├── home-page/
+│   │   │   │   ├── home-page.component.ts
+│   │   │   │   ├── home-page.component.html
+│   │   │   ├── task-list-page/
+│   │   │   │   ├── task-list-page.component.ts
+│   │   │   │   ├── task-list-page.component.html
 │   ├── assets/
 │   │   ├── images/
-│   │   │   ├── task-icon.png
-
+│   │   │   ├── task.png
+│   │   │   ├── delete.png
+│   │   │   ├── go-back.png
+│   │   │   ├── home.png
+│   │   │   ├── edit.png
 
 
 
