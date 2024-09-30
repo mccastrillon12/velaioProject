@@ -6,7 +6,6 @@
 
 .task-form__title {
   font-size: 1.25rem;
-  margin-bottom: 1.25rem;
   text-align: center;
   color: var(--primary-color);
 }
@@ -212,6 +211,31 @@
   background-color: black;
   color: white;
 }
+.task-form__header {
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  position: relative; 
+  margin-bottom: 20px;
+}
+
+.task-form__home-link {
+  position: absolute;
+  left: 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background: #6a0dad;
+  padding: 5px;
+  border-radius: 100%;
+
+}
+
+.task-form__home-icon {
+  width: 20px; 
+  height: 20px; 
+}
+
 
 :root {
   --primary-color: #6a0dad;

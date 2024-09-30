@@ -1,5 +1,14 @@
+
 <div class="task-form__container">
-  <h1 class="task-form__title">{{ taskToEdit ? 'Edit Task' : 'New Task' }}</h1>
+  <div>
+    <div class="task-form__header">
+      <a routerLink="/" class="task-form__home-link">
+        <img src="assets/home.png" alt="Home" class="task-form__home-icon">
+      </a>
+      <h1 class="task-form__title">{{ taskToEdit ? 'Edit Task' : 'New Task' }}</h1>
+    </div>
+  </div>
+
   <form class="task-form__form" [formGroup]="taskForm" (ngSubmit)="saveTask()">
 
     <div class="task-form__group">
