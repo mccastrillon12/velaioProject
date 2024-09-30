@@ -171,7 +171,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   confirmMarkTaskAsCompleted() {
-    const confirmation = window.confirm('¿Estás seguro de que quieres marcar esta tarea como completada?');
+    const confirmation = window.confirm('Are you sure you want to mark this task as completed?');
     if (confirmation) {
       this.markTaskAsCompleted();
     }
@@ -199,7 +199,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   confirmRemovePerson(index: number) {
-    const confirmation = window.confirm('¿Estás seguro de que quieres eliminar a esta persona?');
+    const confirmation = window.confirm('Are you sure you want to eliminate this person??');
     if (confirmation) {
       this.removePerson(index);
     }
