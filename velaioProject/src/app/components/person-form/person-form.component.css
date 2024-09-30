@@ -1,161 +1,150 @@
-
-.duplicate-error {
-  border: 2px solid red;
-}
-
-.error {
-  color: red;
-  font-size: 0.9em;
-}
-
-
 .person-form {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 5px 7px 5px #ebebeb;
+  padding: 1.25rem;
+  background-color: var(--background-color);
+  border-radius: 0.625rem;
+  box-shadow: 0.3125rem 0.4375rem 0.3125rem #ebebeb;
+  max-width: 100%;
 }
-
 
 .person-form__group {
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  margin-bottom: 15px;
+  gap: 0.3125rem;
+  margin-bottom: 0.9375rem;
+  width: 100%;
 }
 
-
 .person-form__label {
-  color: #6a0dad;
-  font-size: 14px;
+  color: var(--primary-color);
+  font-size: 0.875rem;
   font-weight: bold;
 }
 
-
 .person-form__input {
-  padding: 10px;
-  font-size: 16px;
+  padding: 0.625rem;
+  font-size: 1rem;
   border: 1px solid #ced4da;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   outline: none;
+  width: 100%;
+  box-sizing: border-box;
 }
-
 
 .person-form__input--duplicate-error {
   border-color: #ff4d4f;
 }
 
-
-.person-form__input::placeholder {
-  color: #a0a0a0;
-  font-size: 14px;
-}
-
-
 .person-form__error {
   color: #ff4d4f;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
+.person-form__skills-section {
+  margin-bottom: 1.25rem;
+}
 
 .person-form__group--skills {
-  margin-bottom: 20px;
+  margin-bottom: 0.625rem;
 }
-
 
 .person-form__skill {
   display: flex;
-  flex-direction: column;
-  gap: 5px;
-  margin-bottom: 10px;
-  position: relative;
+  align-items: center;
+  gap: 0.3125rem;
+  margin-bottom: 0.625rem;
+  flex-wrap: wrap; /* Asegura que el contenido no se desborde */
+  width: 100%;
+}
+
+.person-form__img-remove {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  align-self: center;
+}
+
+.person-form__img-remove:hover {
+  opacity: 0.7;
 }
 
 .person-form__button {
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  max-width: 100%; /* Evita que los botones se desborden */
+  box-sizing: border-box;
 }
-
 
 .person-form__button--add {
-  background-color: #6a0dad;
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  width: 100%; /* Asegura que el botón se mantenga dentro del contenedor */
+}
+
+.person-form__button--save {
+  background-color: var(--primary-color);
   color: #ffffff;
 }
 
-
-.person-form__button--remove {
-  background-color: #f44336;
-  color: #ffffff;
-  align-self: flex-end;
-  margin-top: 5px;
+.person-form__button--cancel {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
 }
-
 
 .person-form__button:hover {
   opacity: 0.8;
 }
 
-
 .person-form__actions {
   display: flex;
-  justify-content: space-between;
-  padding-bottom: 15px;
+  justify-content: end;
+  gap: 10px;
+  padding-bottom: 0.9375rem;
+  flex-wrap: wrap; /* Asegura que los botones no se desborden */
 }
 
-
-.person-form__button--save {
-  background-color: #6a0dad;
-  color: #ffffff;
+.person-form__add-skill {
+  align-self: flex-end;
+  margin-bottom: 10px;
+  width: 100%; /* Asegura que el botón se mantenga dentro del contenedor */
 }
-
-
-.person-form__button--cancel {
-  border: 1px solid #6a0dad;
-  color: #6a0dad;
-  background-color: transparent;
-}
-
 
 @media (min-width: 768px) {
-  .person-form__group {
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
+  .person-form__add-skill {
+    width: auto; /* Ajusta el ancho para escritorio */
+    align-self: flex-start; /* Mueve el botón a la izquierda */
   }
 
-  .person-form__label {
-    width: 20%;
-    font-size: 16px;
-  }
-
-  .person-form__input {
-    width: 80%;
-  }
-
-  .person-form__skill {
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-  }
-
-  .person-form__button--remove {
-    margin-left: 15px;
-    margin-top: 0;
+  .person-form__button--add {
+    width: auto; /* Asegura que el botón no ocupe todo el ancho en escritorio */
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
   .person-form {
-    padding: 30px;
+    padding: 1.875rem;
     max-width: 1200px;
     margin: 0 auto;
   }
 
   .person-form__button {
-    font-size: 16px;
+    font-size: 1rem;
   }
+}
+
+/* Variables de color */
+:root {
+  --primary-color: #6a0dad;
+  --danger-color: #ff4d4f;
+  --background-color: #ffffff;
 }

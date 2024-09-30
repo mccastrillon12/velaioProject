@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { PersonFormComponent } from '../person-form/person-form.component';
@@ -23,7 +23,10 @@ export class TaskFormComponent implements OnInit {
   private router = inject(Router);
 
   today: string;
-  isAddingPerson: boolean = false;  
+  isAddingPerson: boolean = false;
+
+  // Declarar el Map para almacenar los valores originales
+  private originalPersonValues = new Map<FormGroup, any>();
 
   constructor() {
     const currentDate = new Date();
@@ -43,7 +46,6 @@ export class TaskFormComponent implements OnInit {
 
   initializeForm() {
     if (this.taskToEdit) {
-
       this.taskForm.patchValue({
         name: this.taskToEdit.name,
         deadline: this.taskToEdit.deadline,
@@ -69,7 +71,7 @@ export class TaskFormComponent implements OnInit {
 
   addPerson(person?: IPerson) {
     if (!person) {
-      this.isAddingPerson = true; 
+      this.isAddingPerson = true;
     }
 
     const personForm = this.fb.group({
@@ -81,21 +83,48 @@ export class TaskFormComponent implements OnInit {
           : [this.fb.control('', Validators.required)]
       ),
       isEditing: [person ? false : true],
+      isNew: [person ? false : true], // Añadir la bandera isNew
     });
 
     this.persons.push(personForm);
   }
 
   editPerson(index: number) {
-    const person = this.persons.at(index);
+    const person = this.persons.at(index) as FormGroup;
+    // Guardar valores originales en el Map
+    this.originalPersonValues.set(person, person.getRawValue());
     person.get('isEditing')?.setValue(true);
     this.isAddingPerson = true;
   }
 
   onSavePerson(index: number) {
-    const person = this.persons.at(index);
+    const person = this.persons.at(index) as FormGroup;
     person.get('isEditing')?.setValue(false);
+    person.get('isNew')?.setValue(false);
+    // Eliminar los valores originales del Map
+    this.originalPersonValues.delete(person);
     this.isAddingPerson = false;
+  }
+
+  cancelPerson(index: number) {
+    const person = this.persons.at(index) as FormGroup;
+    if (person.get('isNew')?.value) {
+      // Si es una nueva persona, eliminarla de la lista
+      this.persons.removeAt(index);
+    } else {
+      // Si es una persona existente, salir del modo de edición y restaurar valores originales
+      person.get('isEditing')?.setValue(false);
+      this.restoreOriginalPersonValues(person);
+    }
+    this.isAddingPerson = false;
+  }
+
+  restoreOriginalPersonValues(person: FormGroup) {
+    const originalValues = this.originalPersonValues.get(person);
+    if (originalValues) {
+      person.reset(originalValues);
+      this.originalPersonValues.delete(person);
+    }
   }
 
   removePerson(index: number) {
@@ -118,7 +147,6 @@ export class TaskFormComponent implements OnInit {
   saveTask() {
     if (this.taskForm.valid && !this.hasDuplicateNames()) {
       if (this.taskToEdit) {
-      
         const updatedTask: Partial<ITask> = {
           ...this.taskToEdit,
           ...this.taskForm.value,
@@ -126,7 +154,6 @@ export class TaskFormComponent implements OnInit {
         };
         this.taskService.updateTask(this.taskToEdit.id, updatedTask);
       } else {
-       
         const newTask: ITask = {
           ...this.taskForm.value,
           id: Math.random(),
@@ -138,7 +165,7 @@ export class TaskFormComponent implements OnInit {
 
       this.taskForm.reset();
       this.persons.clear();
-      this.taskSaved.emit();  
+      this.taskSaved.emit();
     } else {
       this.taskForm.markAllAsTouched();
     }
@@ -158,6 +185,27 @@ export class TaskFormComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['/']); 
+    this.router.navigate(['/']);
+  }
+
+  confirmRemovePerson(index: number) {
+    const confirmation = window.confirm('¿Estás seguro de que quieres eliminar a esta persona?');
+    if (confirmation) {
+      this.removePerson(index);
+    }
+  }
+  confirmDeleteTask() {
+    const confirmation = window.confirm('Are you sure you want to delete this task?');
+    if (confirmation) {
+      this.deleteTask();
+    }
+  }
+
+  deleteTask() {
+    if (this.taskToEdit) {
+      this.taskService.deleteTask(this.taskToEdit.id);
+      this.taskSaved.emit();
+      this.router.navigate(['/']);
+    }
   }
 }

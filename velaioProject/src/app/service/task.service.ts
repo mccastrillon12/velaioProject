@@ -34,4 +34,8 @@ export class TaskService {
       this.tasksSubject.next(this.tasks);
     }
   }
+  deleteTask(taskId: number) {
+    this.tasks = this.tasks.filter(task => task.id !== taskId);
+    this.tasksSubject.next(this.tasks);
+  }
 }
