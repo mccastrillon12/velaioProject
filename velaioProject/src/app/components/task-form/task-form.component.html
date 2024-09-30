@@ -35,11 +35,11 @@
         <li *ngFor="let person of persons.controls; let i = index" class="task-form__list-item">
           <div *ngIf="person.get('isEditing')?.value" [formGroupName]="i">
             <app-person-form 
-  [personForm]="getPersonForm(i)" 
-  [isNameDuplicate]="isNameDuplicate(i)" 
-  (cancel)="cancelPerson(i)" 
-  (save)="onSavePerson(i)">
-</app-person-form>
+              [personForm]="getPersonForm(i)" 
+              [isNameDuplicate]="isNameDuplicate(i)" 
+              (cancel)="cancelPerson(i)" 
+              (save)="onSavePerson(i)">
+            </app-person-form>
           </div>
           <div *ngIf="!person.get('isEditing')?.value" class="task-form__team-member">
             <span
@@ -93,33 +93,33 @@
       </div>
       <div class="task-form__buttons">
         <button type="submit" class="task-form__button task-form__button--submit">
-         Save Task
-        </button>
-       
-        <button
-          *ngIf="taskToEdit"
-          type="button"
-          (click)="markTaskAsCompleted()"
-          class="task-form__button task-form__button--complete"
-        >
-        Complete Task
+          Save Task
         </button>
 
         <button
-        *ngIf="taskToEdit"
-        type="button"
-        (click)="confirmDeleteTask()"
-        class="task-form__button task-form__button--delete"
-      >
-        Delete Task
-      </button>
-      <button
-      type="button"
-      class="task-form__button task-form__button--cancel"
-      (click)="cancel()"
-    >
-    Cancel
-    </button>
+          *ngIf="taskToEdit && !taskToEdit.isCompleted"
+          type="button"
+          (click)="confirmMarkTaskAsCompleted()"
+          class="task-form__button task-form__button--complete"
+        >
+          Complete Task
+        </button>
+
+        <button
+          *ngIf="taskToEdit"
+          type="button"
+          (click)="confirmDeleteTask()"
+          class="task-form__button task-form__button--delete"
+        >
+          Delete Task
+        </button>
+        <button
+          type="button"
+          class="task-form__button task-form__button--cancel"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   </form>

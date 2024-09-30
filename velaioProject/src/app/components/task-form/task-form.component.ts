@@ -2,6 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular
 import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { PersonFormComponent } from '../person-form/person-form.component';
 import { TaskService } from '../../service/task.service';
 import { ITask } from '../../models/task.model';
@@ -21,11 +22,11 @@ export class TaskFormComponent implements OnInit {
   private fb = inject(FormBuilder);
   private taskService = inject(TaskService);
   private router = inject(Router);
+  private location = inject(Location);
 
   today: string;
   isAddingPerson: boolean = false;
 
-  // Declarar el Map para almacenar los valores originales
   private originalPersonValues = new Map<FormGroup, any>();
 
   constructor() {
@@ -83,7 +84,7 @@ export class TaskFormComponent implements OnInit {
           : [this.fb.control('', Validators.required)]
       ),
       isEditing: [person ? false : true],
-      isNew: [person ? false : true], // Añadir la bandera isNew
+      isNew: [person ? false : true],
     });
 
     this.persons.push(personForm);
@@ -91,7 +92,7 @@ export class TaskFormComponent implements OnInit {
 
   editPerson(index: number) {
     const person = this.persons.at(index) as FormGroup;
-    // Guardar valores originales en el Map
+
     this.originalPersonValues.set(person, person.getRawValue());
     person.get('isEditing')?.setValue(true);
     this.isAddingPerson = true;
@@ -101,7 +102,7 @@ export class TaskFormComponent implements OnInit {
     const person = this.persons.at(index) as FormGroup;
     person.get('isEditing')?.setValue(false);
     person.get('isNew')?.setValue(false);
-    // Eliminar los valores originales del Map
+
     this.originalPersonValues.delete(person);
     this.isAddingPerson = false;
   }
@@ -109,10 +110,8 @@ export class TaskFormComponent implements OnInit {
   cancelPerson(index: number) {
     const person = this.persons.at(index) as FormGroup;
     if (person.get('isNew')?.value) {
-      // Si es una nueva persona, eliminarla de la lista
       this.persons.removeAt(index);
     } else {
-      // Si es una persona existente, salir del modo de edición y restaurar valores originales
       person.get('isEditing')?.setValue(false);
       this.restoreOriginalPersonValues(person);
     }
@@ -171,6 +170,13 @@ export class TaskFormComponent implements OnInit {
     }
   }
 
+  confirmMarkTaskAsCompleted() {
+    const confirmation = window.confirm('¿Estás seguro de que quieres marcar esta tarea como completada?');
+    if (confirmation) {
+      this.markTaskAsCompleted();
+    }
+  }
+
   markTaskAsCompleted() {
     if (this.taskToEdit) {
       const updatedTask: Partial<ITask> = {
@@ -180,12 +186,16 @@ export class TaskFormComponent implements OnInit {
         people: this.persons.value,
       };
       this.taskService.updateTask(this.taskToEdit.id, updatedTask);
+
+
+      this.taskToEdit.isCompleted = true;
+
       this.taskSaved.emit();
     }
   }
 
   cancel() {
-    this.router.navigate(['/']);
+    this.location.back();
   }
 
   confirmRemovePerson(index: number) {
@@ -194,6 +204,7 @@ export class TaskFormComponent implements OnInit {
       this.removePerson(index);
     }
   }
+
   confirmDeleteTask() {
     const confirmation = window.confirm('Are you sure you want to delete this task?');
     if (confirmation) {
