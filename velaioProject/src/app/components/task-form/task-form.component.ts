@@ -194,4 +194,18 @@ export class TaskFormComponent implements OnInit {
       this.removePerson(index);
     }
   }
+  confirmDeleteTask() {
+    const confirmation = window.confirm('Are you sure you want to delete this task?');
+    if (confirmation) {
+      this.deleteTask();
+    }
+  }
+
+  deleteTask() {
+    if (this.taskToEdit) {
+      this.taskService.deleteTask(this.taskToEdit.id);
+      this.taskSaved.emit();
+      this.router.navigate(['/']);
+    }
+  }
 }

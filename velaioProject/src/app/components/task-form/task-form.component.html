@@ -95,13 +95,7 @@
         <button type="submit" class="task-form__button task-form__button--submit">
          Save Task
         </button>
-        <button
-          type="button"
-          class="task-form__button task-form__button--cancel"
-          (click)="cancel()"
-        >
-        Cancel
-        </button>
+       
         <button
           *ngIf="taskToEdit"
           type="button"
@@ -110,6 +104,22 @@
         >
         Complete Task
         </button>
+
+        <button
+        *ngIf="taskToEdit"
+        type="button"
+        (click)="confirmDeleteTask()"
+        class="task-form__button task-form__button--delete"
+      >
+        Delete Task
+      </button>
+      <button
+      type="button"
+      class="task-form__button task-form__button--cancel"
+      (click)="cancel()"
+    >
+    Cancel
+    </button>
       </div>
     </div>
   </form>
