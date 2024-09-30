@@ -22,7 +22,7 @@ Welcome to the **Velaio Project**, a task management application designed to cre
 - **Add/Edit Tasks**: Create and manage tasks with deadlines.
 - **Assign People**: Assign people to each task, including their skills.
 - **Responsive Design**: A mobile-first approach to ensure a seamless experience across devices.
-- **Reusable Components**: Leverage reusable components such as `BaseTaskFormComponent` to reduce code repetition.
+- **Reusable Components**: Leverage reusable components such as `TaskFormComponent and PersonFormComponent ` to reduce code repetition.
 - **Validation**: Ensure that form inputs are validated with clear error messages.
 
 ## Getting Started
@@ -76,9 +76,6 @@ To start the Angular development server, run:
     - The UI is responsive, ensuring good usability across both mobile and desktop devices.
 
 ### Components Overview
-
-#### BaseTaskFormComponent
-    `BaseTaskFormComponent` is the foundation of our task form structure. It is a reusable component that includes all the common logic for task forms, such as adding/removing people, validating duplicate names, and managing skills.
 
 #### TaskFormComponent
 `TaskFormComponent` is used for creating new tasks. It uses `BaseTaskFormComponent` for its form logic and adds specific functionalities related to task creation.
