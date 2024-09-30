@@ -17,6 +17,6 @@ export class TaskFilterComponent {
   setFilter(filter: string) {
     this.filterChanged.emit(filter);
     this.activeFilter = filter;
-    
+
   }
 }

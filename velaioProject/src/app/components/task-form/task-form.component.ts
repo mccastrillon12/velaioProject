@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Location } from '@angular/common';
 import { PersonFormComponent } from '../person-form/person-form.component';
 import { TaskService } from '../../service/task.service';
@@ -11,7 +11,7 @@ import { IPerson } from '../../models/person.model';
 @Component({
   selector: 'app-task-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, PersonFormComponent],
+  imports: [CommonModule, ReactiveFormsModule, PersonFormComponent, RouterModule],
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css'],
 })

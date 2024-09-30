@@ -5,7 +5,6 @@
   right: 1.25rem; 
 }
 
-
 .add-task-btn {
   padding: 0.5rem 1rem;
   font-size: 1rem; 
@@ -28,7 +27,6 @@
   transform: scale(1.1);
 }
 
-
 .plus-icon {
   font-size: 1.75rem; 
 }
@@ -36,7 +34,6 @@
 .x-icon {
   font-size: 1.25rem; 
 }
-
 
 .floating-menu {
   position: absolute;

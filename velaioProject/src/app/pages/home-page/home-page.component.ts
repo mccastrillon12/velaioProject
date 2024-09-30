@@ -28,7 +28,7 @@ export class HomePageComponent {
       day: 'numeric'
     });
 
-    
+
     this.taskService.tasks$.subscribe(tasks => {
       this.tasks = tasks;
       this.calculateCompletionPercentage();
@@ -45,7 +45,7 @@ export class HomePageComponent {
     }
   }
 
-  
+
   getStrokeDashArray(): string {
     const progress = (this.completionPercentage / 100) * (2 * Math.PI * 30);
     const remaining = 2 * Math.PI * 30;

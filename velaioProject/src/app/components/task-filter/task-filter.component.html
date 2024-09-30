@@ -1,20 +1,14 @@
 <div class="filter__wrapper">
   <div class="filter">
-    <button
-      class="filter__button"
-      [ngClass]="{ 'filter__button--active': activeFilter === 'all' }"
+    <button class="filter__button" [ngClass]="{ 'filter__button--active': activeFilter === 'all' }"
       (click)="setFilter('all')">
       All
     </button>
-    <button
-      class="filter__button"
-      [ngClass]="{ 'filter__button--active': activeFilter === 'pending' }"
+    <button class="filter__button" [ngClass]="{ 'filter__button--active': activeFilter === 'pending' }"
       (click)="setFilter('pending')">
       Pending
     </button>
-    <button
-      class="filter__button"
-      [ngClass]="{ 'filter__button--active': activeFilter === 'completed' }"
+    <button class="filter__button" [ngClass]="{ 'filter__button--active': activeFilter === 'completed' }"
       (click)="setFilter('completed')">
       Completed
     </button>

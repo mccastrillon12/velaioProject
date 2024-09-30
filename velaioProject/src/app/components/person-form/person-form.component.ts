@@ -29,13 +29,13 @@ export class PersonFormComponent {
     if (this.skills.length > 1) {
       const skillValue = this.skills.at(index).value;
       if (skillValue && skillValue.trim() !== '') {
-        // Si el valor del input no está vacío, pedir confirmación
+    
         const confirmation = window.confirm('Are you sure you want to delete this skill?');
         if (confirmation) {
           this.removeSkill(index);
         }
       } else {
-        // Si el valor del input está vacío, eliminar sin confirmación
+
         this.removeSkill(index);
       }
     }
