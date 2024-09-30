@@ -3,6 +3,7 @@
   background-color: var(--background-color);
   border-radius: 0.625rem;
   box-shadow: 0.3125rem 0.4375rem 0.3125rem #ebebeb;
+  max-width: 100%;
 }
 
 .person-form__group {
@@ -10,6 +11,7 @@
   flex-direction: column;
   gap: 0.3125rem;
   margin-bottom: 0.9375rem;
+  width: 100%;
 }
 
 .person-form__label {
@@ -24,6 +26,8 @@
   border: 1px solid #ced4da;
   border-radius: 0.5rem;
   outline: none;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .person-form__input--duplicate-error {
@@ -48,11 +52,13 @@
   align-items: center;
   gap: 0.3125rem;
   margin-bottom: 0.625rem;
+  flex-wrap: wrap; /* Asegura que el contenido no se desborde */
+  width: 100%;
 }
 
 .person-form__img-remove {
-  width: 24px; /* Ajusta el tamaño según sea necesario */
-  height: 24px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
   transition: opacity 0.3s ease;
   align-self: center;
@@ -72,13 +78,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 100px; /* Asegura un ancho mínimo consistente para los botones */
+  min-width: 100px;
+  max-width: 100%; /* Evita que los botones se desborden */
+  box-sizing: border-box;
 }
 
 .person-form__button--add {
   background-color: transparent;
   border: 1px solid var(--primary-color);
   color: var(--primary-color);
+  width: 100%; /* Asegura que el botón se mantenga dentro del contenedor */
 }
 
 .person-form__button--save {
@@ -98,46 +107,30 @@
 
 .person-form__actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
   gap: 10px;
   padding-bottom: 0.9375rem;
+  flex-wrap: wrap; /* Asegura que los botones no se desborden */
 }
 
 .person-form__add-skill {
   align-self: flex-end;
-  margin-bottom: 10px; /* Ajusta el espaciado según necesites */
+  margin-bottom: 10px;
+  width: 100%; /* Asegura que el botón se mantenga dentro del contenedor */
 }
 
-@media (min-width: var(--breakpoint-md)) {
-  .person-form__group {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.9375rem;
+@media (min-width: 768px) {
+  .person-form__add-skill {
+    width: auto; /* Ajusta el ancho para escritorio */
+    align-self: flex-start; /* Mueve el botón a la izquierda */
   }
 
-  .person-form__label {
-    width: 20%;
-    font-size: 1rem;
-  }
-
-  .person-form__input {
-    width: 80%;
-  }
-
-  .person-form__skill {
-    gap: 0.9375rem;
-  }
-
-  .person-form__img-remove {
-    margin-left: 0.9375rem;
-  }
-
-  .person-form__actions {
-    justify-content: flex-end;
+  .person-form__button--add {
+    width: auto; /* Asegura que el botón no ocupe todo el ancho en escritorio */
   }
 }
 
-@media (min-width: var(--breakpoint-lg)) {
+@media (min-width: 992px) {
   .person-form {
     padding: 1.875rem;
     max-width: 1200px;
@@ -154,6 +147,4 @@
   --primary-color: #6a0dad;
   --danger-color: #ff4d4f;
   --background-color: #ffffff;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 992px;
 }

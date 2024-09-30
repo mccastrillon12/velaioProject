@@ -114,10 +114,12 @@
 }
 
 .task-form__team-name {
-  font-size: 0.9rem;
-  color: #555;
+  font-size: 0.8rem;
+  color: #555; 
+  font-weight: 600; 
   margin: 0;
 }
+
 
 .task-form__team-skills {
   list-style: none;
@@ -193,6 +195,7 @@
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  flex-direction: column;
 }
 
 .task-form__img-button {
@@ -205,6 +208,7 @@
 .task-form__img-button:hover {
   opacity: 0.7;
 }
+
 
 :root {
   --primary-color: #6a0dad;
@@ -263,6 +267,7 @@
 
   .task-form__buttons {
     margin-top: 0;
+    flex-direction: row;
   }
 }
 

@@ -17,7 +17,7 @@
     </div>
 
     <div class="task-form__group">
-      <label for="deadline" class="task-form__label">Fecha Límite</label>
+      <label for="deadline" class="task-form__label">Deadline</label>
       <div class="task-form__input-group">
         <span class="task-form__icon">
           <i class="fas fa-calendar-alt"></i>
@@ -30,7 +30,7 @@
     </div>
 
     <div class="task-form__group" formArrayName="persons" *ngIf="persons.length > 0">
-      <h2 class="task-form__subtitle">Personas</h2>
+      <h2 class="task-form__subtitle">Team</h2>
       <ul class="task-form__list">
         <li *ngFor="let person of persons.controls; let i = index" class="task-form__list-item">
           <div *ngIf="person.get('isEditing')?.value" [formGroupName]="i">
