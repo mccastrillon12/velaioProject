@@ -1,5 +1,4 @@
 <div class="person-form" [formGroup]="personForm">
-
   <div class="person-form__group">
     <label class="person-form__label">Full Name</label>
     <input 
@@ -27,19 +26,30 @@
     </div>
   </div>
 
-  <div class="person-form__group person-form__group--skills" formArrayName="skills">
-    <div *ngFor="let skill of skills.controls; let i = index" class="person-form__skill">
+  <div class="person-form__skills-section" formArrayName="skills">
+    <div class="person-form__group person-form__group--skills">
       <label class="person-form__label">Skill</label>
-      <input 
-        [formControlName]="i" 
-        class="person-form__input" 
-        placeholder="Enter skill" />
-      <div *ngIf="skill.invalid && skill.touched" class="person-form__error">
-        <div *ngIf="skill.errors?.['required']">Skill is required.</div>
+      <div *ngFor="let skill of skills.controls; let i = index" class="person-form__skill">
+        
+        <input 
+          [formControlName]="i" 
+          class="person-form__input" 
+          placeholder="Enter skill" />
+        <div *ngIf="skill.invalid && skill.touched" class="person-form__error">
+          <div *ngIf="skill.errors?.['required']">Skill is required.</div>
+        </div>
+        <img 
+          *ngIf="i > 0" 
+          src="assets/delete.png" 
+          alt="Remove Skill" 
+          class="person-form__img-remove" 
+          (click)="confirmRemoveSkill(i)"
+        />
       </div>
-      <button type="button" *ngIf="i > 0" class="person-form__button person-form__button--remove" (click)="removeSkill(i)">Remove Skill</button>
     </div>
-    <button type="button" class="person-form__button person-form__button--add" (click)="addSkill()">Add Skill</button>
+    <div class="person-form__add-skill">
+      <button type="button" class="person-form__button person-form__button--add" (click)="addSkill()">Add Skill</button>
+    </div>
   </div>
 
   <div class="person-form__actions">
