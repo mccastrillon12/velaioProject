@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="task-list__header">
+    <a routerLink="/" class="task-list__home-link">
+      <img src="assets/home.png" alt="Home" class="task-list__home-icon">
+    </a>
+    <h1 class="task-list__title">All Tasks</h1>
+  </div>
+  <app-task-filter (filterChanged)="onFilterChanged($event)"></app-task-filter>
+  <app-task-list [tasks]="filteredTasks"></app-task-list>
+</div>

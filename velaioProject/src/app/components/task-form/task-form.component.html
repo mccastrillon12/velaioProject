@@ -1,0 +1,103 @@
+<div class="task-form__container">
+  <div>
+    <div class="task-form__header">
+      <a routerLink="/" class="task-form__home-link">
+        <img src="assets/home.png" alt="Home" class="task-form__home-icon">
+      </a>
+      <h1 class="task-form__title">{{ taskToEdit ? 'Edit Task' : 'New Task' }}</h1>
+    </div>
+  </div>
+
+  <form class="task-form__form" [formGroup]="taskForm" (ngSubmit)="saveTask()">
+
+    <div class="task-form__group">
+      <label for="name" class="task-form__label">Task name</label>
+      <div class="task-form__input-group">
+        <span class="task-form__icon">
+          <i class="fas fa-tasks"></i>
+        </span>
+        <input id="name" class="task-form__input" formControlName="name" placeholder="mobile design..." />
+      </div>
+      <div *ngIf="taskForm.get('name')?.invalid && taskForm.get('name')?.touched" class="task-form__error">
+        <div *ngIf="taskForm.get('name')?.errors?.['required']">The name is required </div>
+        <div *ngIf="taskForm.get('name')?.errors?.['minlength']">Minimum 5 characters.</div>
+      </div>
+    </div>
+
+    <div class="task-form__group">
+      <label for="deadline" class="task-form__label">Deadline</label>
+      <div class="task-form__input-group">
+        <span class="task-form__icon">
+          <i class="fas fa-calendar-alt"></i>
+        </span>
+        <input type="date" id="deadline" class="task-form__input" formControlName="deadline" [min]="today"
+          placeholder="mm/dd/yyyy" />
+      </div>
+      <div *ngIf="taskForm.get('deadline')?.invalid && taskForm.get('deadline')?.touched" class="task-form__error">
+        <div *ngIf="taskForm.get('deadline')?.errors?.['required']">Deadline is required.</div>
+      </div>
+    </div>
+
+    <div class="task-form__group" formArrayName="persons" *ngIf="persons.length > 0">
+      <h2 class="task-form__subtitle">Team</h2>
+      <ul class="task-form__list">
+        <li *ngFor="let person of persons.controls; let i = index" class="task-form__list-item">
+          <div *ngIf="person.get('isEditing')?.value" [formGroupName]="i">
+            <app-person-form [personForm]="getPersonForm(i)" [isNameDuplicate]="isNameDuplicate(i)"
+              (cancel)="cancelPerson(i)" (save)="onSavePerson(i)">
+            </app-person-form>
+          </div>
+          <div *ngIf="!person.get('isEditing')?.value" class="task-form__team-member">
+            <span class="task-form__team-initial" [ngClass]="{
+                'task-form__team-initial--dark': i % 3 === 0,
+                'task-form__team-initial--medium': i % 3 === 1,
+                'task-form__team-initial--light': i % 3 === 2
+              }" [title]="person.get('fullName')?.value">
+              {{ (person.get('fullName')?.value || '').charAt(0) }}
+            </span>
+            <div class="task-form__team-info">
+              <p class="task-form__team-name">
+                {{ person.get('fullName')?.value }} ({{ person.get('age')?.value }} años)
+              </p>
+              <ul class="task-form__team-skills">
+                <li *ngFor="let skill of getSkills(i).controls">{{ skill.value }}</li>
+              </ul>
+            </div>
+            <div class="task-form__team-buttons">
+              <img src="assets/edit.png" alt="Editar" class="task-form__img-button" (click)="editPerson(i)" />
+              <img src="assets/delete.png" alt="Eliminar" class="task-form__img-button"
+                (click)="confirmRemovePerson(i)" />
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="task-form__actions">
+      <div class="task-form__add-person">
+        <button type="button" *ngIf="!isAddingPerson" class="task-form__button task-form__button--add"
+          (click)="addPerson()">
+          Add Person
+        </button>
+      </div>
+      <div class="task-form__buttons">
+        <button type="submit" class="task-form__button task-form__button--submit">
+          Save Task
+        </button>
+
+        <button *ngIf="taskToEdit && !taskToEdit.isCompleted" type="button" (click)="confirmMarkTaskAsCompleted()"
+          class="task-form__button task-form__button--complete">
+          Complete Task
+        </button>
+
+        <button *ngIf="taskToEdit" type="button" (click)="confirmDeleteTask()"
+          class="task-form__button task-form__button--delete">
+          Delete Task
+        </button>
+        <button type="button" class="task-form__button task-form__button--cancel" (click)="cancel()">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

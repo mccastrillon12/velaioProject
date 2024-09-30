@@ -1,0 +1,266 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.date {
+    display: flex;
+    gap: 5px;
+}
+
+.date p {
+    font-size: 0.8125rem;
+    margin-right: 0.5rem;
+    color: var(--text-muted);
+}
+
+.overview {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.overview-card {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 0.625rem;
+    text-align: center;
+    width: 100%;
+    max-width: 18.75rem;
+    position: relative;
+}
+
+.no-tasks {
+    background: #f0f0f0;
+    color: var(--text-muted);
+}
+
+.progress-circle {
+    position: relative;
+    width: 4.375rem;
+    height: 4.375rem;
+    margin: 1rem auto;
+}
+
+.progress-circle svg {
+    width: 4.375rem;
+    height: 4.375rem;
+}
+
+.background-circle,
+.progress-circle-stroke {
+    fill: none;
+    stroke-width: 5;
+    transform: translate(0, 0);
+}
+
+.background-circle {
+    stroke: rgba(255, 255, 255, 0.3);
+}
+
+.progress-circle-stroke {
+    stroke: #ffffff;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.5s ease-in-out;
+}
+
+.progress-circle span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.task-list-section {
+    margin-top: 2rem;
+}
+
+.task-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.task-list-header h3 {
+    margin: 0;
+    color: var(--primary-color);
+}
+
+.view-all-link {
+    font-size: 0.875rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.view-all-link:hover {
+    text-decoration: underline;
+}
+
+.task-item {
+    background: #f8f8f8;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+}
+
+.task-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(106, 13, 173, 0.17);
+    padding: 0.625rem;
+    border-radius: 50%;
+    margin-right: 0.625rem;
+}
+
+.task-icon-image {
+    width: 1.5rem;
+}
+
+.task-info {
+    flex-grow: 1;
+}
+
+.task-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.task-details {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.task-details .task-date {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+}
+
+.task-options {
+    margin-left: 1rem;
+}
+
+.edit-btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-btn:hover {
+    opacity: 0.8;
+}
+
+.view-todo-btn {
+    padding: 10px;
+    background: white;
+    border: none;
+    color: #6a0dad;
+    border-radius: 0.5rem;
+}
+
+.no-upcoming-tasks {
+
+    color: #a59c9c;
+    font-size: 25px;
+    justify-content: center;
+    display: flex;
+    height: 50vh;
+    text-align: center;
+    align-items: center;
+}
+
+.more-tasks-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 0.8rem;
+    font-weight: bold;
+    padding: 0;
+}
+
+@media (min-width: var(--breakpoint-md)) {
+    .header {
+        margin-bottom: 2rem;
+    }
+
+    .overview {
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .overview-card {
+        max-width: 48%;
+        margin-bottom: 1rem;
+    }
+
+    .task-list-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .task-item {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+
+    .task-info {
+        margin-right: 1rem;
+    }
+
+    .edit-btn {
+        padding: 0.5rem 1.5rem;
+    }
+}
+
+@media (min-width: var(--breakpoint-lg)) {
+    .header {
+        margin-bottom: 3rem;
+    }
+
+    .overview {
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .overview-card {
+        max-width: 30%;
+    }
+
+    .task-list-header h3 {
+        font-size: 2rem;
+    }
+
+    .task-item {
+        padding: 2rem;
+    }
+
+    .edit-btn {
+        font-size: 1rem;
+        padding: 0.75rem 2rem;
+    }
+}
